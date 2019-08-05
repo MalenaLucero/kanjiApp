@@ -1,11 +1,17 @@
 const url = 'https://kanjiapi.dev/v1/kanji/蛍'
-let kanji
+var kanji
 
 const confirm = () =>{
     let input = document.getElementById('input')
     kanji = input.value
 
-    let uri = 'https://kanjiapi.dev/v1/kanji/'+kanji
+    for (const c of kanji) {
+      console.log(c)
+    }//iteration of a string
+
+
+
+    let uri = 'https://kanjiapi.dev/v1/kanji/'+kanji[0]
     console.log(uri);
 
     fetch(uri)
