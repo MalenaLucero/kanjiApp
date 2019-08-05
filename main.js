@@ -46,7 +46,7 @@ function storedWord(word, kanjiList){
   this.kanjiList = kanjiList
 }
 
-//kanji constructor
+//internal kanji constructor
 function internalKanji(kanji, jlpt, meaning){
   this.kanji = kanji
   this.jlpt = jlpt
