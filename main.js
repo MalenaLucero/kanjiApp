@@ -1,32 +1,36 @@
 const url = 'https://kanjiapi.dev/v1/kanji/蛍'
 let kanji
-let kanjiArray = []
+let kanjiArray = [] //array with the word's kanji (minus hiragana and katakana)
 
 const confirm = () =>{
     let input = document.getElementById('input')
     kanji = input.value
+    console.log(getKanjiArray(kanji))
+    
 
-    for (const c of kanji) {
-      console.log(c, c.charCodeAt())//unicode in dec
-      let code = c.charCodeAt()
-      console.log(code.toString(16))//unicode in hex
-      if(c.charCodeAt() >= 19968){
-        kanjiArray.push(c)
-      }
-    }//iteration of a string. 
+    kanjiArray.forEach(e=>{
+      let uri = 'https://kanjiapi.dev/v1/kanji/'+e
+      console.log(uri);
 
-    console.log(kanjiArray)
+      fetch(uri)
+          .then(res=>res.json())
+          .then(data=>console.log(data))
+          .catch(error=>console.log(error))
+    })
+}
 
-
-
-
-    let uri = 'https://kanjiapi.dev/v1/kanji/'+kanji[0]
-    console.log(uri);
-
-    fetch(uri)
-        .then(res=>res.json())
-        .then(data=>console.log(data))
-        .catch(error=>console.log(error))
+//from a full kanji and kana word or phrase, it extracts only the kanji
+const getKanjiArray = (word) =>{
+  kanjiArray = []
+  //iteration of a string
+  for (const c of word) {
+    console.log(c, c.charCodeAt())//unicode in dec
+    console.log(c.charCodeAt().toString(16))//unicode in hex
+    if(c.charCodeAt() >= 13312){
+      kanjiArray.push(c)
+    }
+  }
+  return kanjiArray
 }
 
 
