@@ -27,8 +27,12 @@ const confirm = () =>{
     })
 
     let newWord = new storedWord(kanji, anotation, kanjiArray)
-    allWords.push(newWord)
-    console.log(allWords)    
+    allWords.push(newWord)    
+}
+
+const searchKanjiInfo = () =>{
+  let input = document.getElementById('searchKanji')
+  allWords.forEach(e=> {if(e.word === input.value) console.log('si')})
 }
 
 //from a full kanji and kana word or phrase, it extracts only the kanji
@@ -69,11 +73,11 @@ word = {
 */
 
 //receives an object
-const wordsSharingKanji = () =>{
+const wordsSharingKanji = (term) =>{
   let sameKanji
   let wordsSharing = allWords.filter(word=>{
     sameKanji = false
-    allWords[0].kanjiList.forEach(e=>{
+    term.kanjiList.forEach(e=>{
       word.kanjiList.forEach(elem => {
         if(e.kanji === elem.kanji) sameKanji = true
       })
