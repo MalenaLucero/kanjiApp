@@ -67,6 +67,21 @@ word = {
 }
 */
 
+//receives an object
+const wordsSharingKanji = () =>{
+  let sameKanji
+  let wordsSharing = allWords.filter(word=>{
+    sameKanji = false
+    allWords[0].kanjiList.forEach(e=>{
+      word.kanjiList.forEach(elem => {
+        if(e.kanji === elem.kanji) sameKanji = true
+      })
+    })
+    if(sameKanji) return word
+  })
+  console.log(wordsSharing)
+}
+
 
 
 
