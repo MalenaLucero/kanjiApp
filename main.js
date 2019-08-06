@@ -8,6 +8,7 @@ let allWords = []
 const confirm = () =>{
     let kanjiInput = document.getElementById('kanjiInput')
     kanji = kanjiInput.value
+    kanjiInput.value = ''
     let anotationInput = document.getElementById('anotationInput')
     anotation = anotationInput.value
     
@@ -79,7 +80,17 @@ const wordsSharingKanji = () =>{
     })
     if(sameKanji) return word
   })
-  console.log(wordsSharing)
+  printList(wordsSharing)
+}
+
+const printList = (array) =>{
+  let ul = document.getElementById('wordsSharingKanjiContainer')
+  ul.innerHTML = ''
+  array.forEach(e=>{
+    let li = document.createElement('li')
+    li.innerText = e.word
+    ul.appendChild(li)
+  })
 }
 
 
