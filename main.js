@@ -32,7 +32,9 @@ const confirm = () =>{
 
 const searchKanjiInfo = () =>{
   let input = document.getElementById('searchKanji')
-  allWords.forEach(e=> {if(e.word === input.value) console.log('si')})
+  kanjiIndex = ''
+  kanjiIndex = allWords.find((e, index)=> {if(e.word === input.value) return index})
+  if(typeof kanjiIndex === 'number') console.log('number')
 }
 
 //from a full kanji and kana word or phrase, it extracts only the kanji
