@@ -30,12 +30,7 @@ const confirm = () =>{
     allWords.push(newWord)    
 }
 
-const searchKanjiInfo = () =>{
-  let input = document.getElementById('searchKanji')
-  kanjiIndex = ''
-  kanjiIndex = allWords.find((e, index)=> {if(e.word === input.value) return index})
-  if(typeof kanjiIndex === 'number') console.log('number')
-}
+
 
 //from a full kanji and kana word or phrase, it extracts only the kanji
 const getKanjiArray = (word) =>{
@@ -67,26 +62,21 @@ function internalKanji(kanji, jlpt, kun_readings, on_readings, meaning){
   this.meaning = meaning
 }
 
-/*
-word = {
-  'kanji': kanjicompleto,
-  'kanjiArray': []
-}
-*/
-
-//receives an object
+//receives a string
 const wordsSharingKanji = (term) =>{
   let sameKanji
-  let wordsSharing = allWords.filter(word=>{
-    sameKanji = false
-    term.kanjiList.forEach(e=>{
-      word.kanjiList.forEach(elem => {
-        if(e.kanji === elem.kanji) sameKanji = true
+  let termsKanji = getKanjiArray(term)
+  termsKanji.forEach(kanji=>{
+    allWords.forEach(word=>{
+      word.kanjiList.forEach(intKanji=>{
+        sameKanji = false
+        if(kanji === intKanji.kanji){
+          sameKanji = true
+          printOnScreen(word.word)
+        }
       })
     })
-    if(sameKanji) return word
   })
-  printList(wordsSharing)
 }
 
 const printList = (array) =>{
@@ -97,6 +87,18 @@ const printList = (array) =>{
     li.innerText = e.word
     ul.appendChild(li)
   })
+}
+
+const printOnScreen = (string) =>{
+  let div = document.getElementById('container')
+  let p = document.createElement('p')
+  p.innerText = string
+  div.appendChild(p)
+}
+
+const showRelatedKanji = () =>{
+  let input = document.getElementById('searchKanji')
+  wordsSharingKanji(input.value)
 }
 
 
