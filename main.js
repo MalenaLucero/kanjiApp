@@ -14,7 +14,7 @@ const confirm = () =>{
     readingInput.value = ''
     let anotationInput = document.getElementById('anotationInput')
     anotation = anotationInput.value
-    anotation.value = ''
+    anotationInput.value = ''
     
     getKanjiArray(kanji)
     kanjiArray.forEach((e, index)=>{
@@ -82,7 +82,7 @@ const wordsSharingKanji = (term) =>{
     })
     if(sameKanji.length > 1){
       printOnScreen('wordsSharingKanjiContainer', `Kanji: ${kanji}`)
-      printList('wordsSharingKanjiContainer', sameKanji)
+      printList('wordsSharingKanjiContainer', sameKanji.map(e=>e.word), sameKanji.map(e=>e.reading))
     }
   })
   wordsSharingOnyomi(term)
@@ -106,18 +106,18 @@ const wordsSharingOnyomi = (term) =>{
       })
       if(sameOnyomi.length > 1){
         printOnScreen('wordsSharingOnyomiContainer', `Onyomi: ${on}`)
-        printList('wordsSharingOnyomiContainer', sameOnyomi)
+        //printList('wordsSharingOnyomiContainer', sameOnyomi)
       }
     })
   })
 }
 
-const printList = (containerId, array) =>{
+const printList = (containerId, array, secondArray) =>{
   let container = document.getElementById(containerId)
   let ul = document.createElement('ul')
-  array.forEach(e=>{
+  array.forEach((e, index)=>{
     let li = document.createElement('li')
-    li.innerText = e.word
+    li.innerText = `${e} (${secondArray[index]})`
     ul.appendChild(li)
   })
   container.appendChild(ul)
