@@ -64,7 +64,7 @@ function internalKanji(kanji, jlpt, kun_readings, on_readings, meaning){
 
 //receives a string
 const wordsSharingKanji = (term) =>{
-  let sameKanji
+  /*let sameKanji
   let termsKanji = getKanjiArray(term)
   termsKanji.forEach(kanji=>{
     allWords.forEach(word=>{
@@ -75,6 +75,31 @@ const wordsSharingKanji = (term) =>{
           printOnScreen(word.word)
         }
       })
+    })
+  })*/
+  wordsSharingOnyomi(term)
+}
+
+//receives a string
+const wordsSharingOnyomi = (term) =>{
+  let termObject = allWords.find(e=> {if(e.word===term) return e})
+  let same = false
+  termObject.kanjiList.forEach(kanji=>{
+    kanji.on_readings.forEach(on=>{
+      console.log(on)
+      let sameOnyomi = []
+      sameOnyomi = allWords.filter(word=>{
+        same = false
+        word.kanjiList.forEach(innerKanji =>{
+          innerKanji.on_readings.forEach(innerOn =>{
+            if(innerOn === on) same = true
+          })
+        })
+        if(same) return word
+      })
+      if(sameOnyomi.length > 1){
+        console.log(sameOnyomi)
+      }
     })
   })
 }
