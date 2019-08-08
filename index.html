@@ -10,14 +10,17 @@
 <body>
     <form>
         <input id="kanjiInput">
+        <input id="readingInput">
         <input id="anotationInput">
         <button type="button" onclick="confirm()">Confirm</button>
     </form>
     <div>
         <input id="searchKanji">
         <button type="button" onclick="showRelatedKanji()">Show words sharing kanji</button>
-        <ul id="wordsSharingKanjiContainer"></ul>
-        <div id="container"></div>
+        
+        <div id="wordsSharingKanjiContainer"></div>
+        
+        <div id="wordsSharingOnyomiContainer"></div>
     </div>
 </body>
 </html>

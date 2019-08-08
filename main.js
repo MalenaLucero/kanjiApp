@@ -9,8 +9,12 @@ const confirm = () =>{
     let kanjiInput = document.getElementById('kanjiInput')
     kanji = kanjiInput.value
     kanjiInput.value = ''
+    let readingInput = document.getElementById('readingInput')
+    reading = readingInput.value
+    readingInput.value = ''
     let anotationInput = document.getElementById('anotationInput')
     anotation = anotationInput.value
+    anotation.value = ''
     
     getKanjiArray(kanji)
     kanjiArray.forEach((e, index)=>{
@@ -26,7 +30,7 @@ const confirm = () =>{
           .catch(error=>console.log(error))
     })
 
-    let newWord = new storedWord(kanji, anotation, kanjiArray)
+    let newWord = new storedWord(kanji, reading, anotation, kanjiArray)
     allWords.push(newWord)    
 }
 
@@ -47,8 +51,9 @@ const getKanjiArray = (word) =>{
 }
 
 //object constructor
-function storedWord(word, anotation, kanjiList){
+function storedWord(word, reading, anotation, kanjiList){
   this.word = word
+  this.reading = reading
   this.anotation = anotation
   this.kanjiList = kanjiList
 }
@@ -64,19 +69,22 @@ function internalKanji(kanji, jlpt, kun_readings, on_readings, meaning){
 
 //receives a string
 const wordsSharingKanji = (term) =>{
-  /*let sameKanji
+  let same
   let termsKanji = getKanjiArray(term)
   termsKanji.forEach(kanji=>{
-    allWords.forEach(word=>{
+    let sameKanji = []
+    sameKanji = allWords.filter(word=>{
+      same = false
       word.kanjiList.forEach(intKanji=>{
-        sameKanji = false
-        if(kanji === intKanji.kanji){
-          sameKanji = true
-          printOnScreen(word.word)
-        }
+        if(kanji === intKanji.kanji) same = true
       })
+      if(same) return word
     })
-  })*/
+    if(sameKanji.length > 1){
+      printOnScreen('wordsSharingKanjiContainer', `Kanji: ${kanji}`)
+      printList('wordsSharingKanjiContainer', sameKanji)
+    }
+  })
   wordsSharingOnyomi(term)
 }
 
@@ -86,7 +94,6 @@ const wordsSharingOnyomi = (term) =>{
   let same = false
   termObject.kanjiList.forEach(kanji=>{
     kanji.on_readings.forEach(on=>{
-      console.log(on)
       let sameOnyomi = []
       sameOnyomi = allWords.filter(word=>{
         same = false
@@ -98,24 +105,26 @@ const wordsSharingOnyomi = (term) =>{
         if(same) return word
       })
       if(sameOnyomi.length > 1){
-        console.log(sameOnyomi)
+        printOnScreen('wordsSharingOnyomiContainer', `Onyomi: ${on}`)
+        printList('wordsSharingOnyomiContainer', sameOnyomi)
       }
     })
   })
 }
 
-const printList = (array) =>{
-  let ul = document.getElementById('wordsSharingKanjiContainer')
-  ul.innerHTML = ''
+const printList = (containerId, array) =>{
+  let container = document.getElementById(containerId)
+  let ul = document.createElement('ul')
   array.forEach(e=>{
     let li = document.createElement('li')
     li.innerText = e.word
     ul.appendChild(li)
   })
+  container.appendChild(ul)
 }
 
-const printOnScreen = (string) =>{
-  let div = document.getElementById('container')
+const printOnScreen = (containerId, string) =>{
+  let div = document.getElementById(containerId)
   let p = document.createElement('p')
   p.innerText = string
   div.appendChild(p)
