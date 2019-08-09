@@ -1,22 +1,14 @@
 //const url = 'https://kanjiapi.dev/v1/kanji/蛍'
-let kanji
-let anotation
-let kanjiArray = [] //array with the word's kanji (minus hiragana and katakana)
+ //array with the word's kanji (minus hiragana and katakana)
 let kanjiData = []
 let allWords = []
 
 const confirm = () =>{
-    let kanjiInput = document.getElementById('kanjiInput')
-    kanji = kanjiInput.value
-    kanjiInput.value = ''
-    let readingInput = document.getElementById('readingInput')
-    reading = readingInput.value
-    readingInput.value = ''
-    let anotationInput = document.getElementById('anotationInput')
-    anotation = anotationInput.value
-    anotationInput.value = ''
-    
-    getKanjiArray(kanji)
+    let kanji = inputValue('kanjiInput')
+    let reading = inputValue('readingInput')
+    let anotation = inputValue('anotationInput')
+    let kanjiArray = getKanjiArray(kanji)//creates an array with only the kanji (no hiragana or katakana)
+
     kanjiArray.forEach((e, index)=>{
       let url = 'https://kanjiapi.dev/v1/kanji/'+e
       fetch(url)
@@ -34,11 +26,16 @@ const confirm = () =>{
     allWords.push(newWord)    
 }
 
-
+const inputValue = (inputId) =>{
+  let input = document.getElementById(inputId)
+  let value = input.value
+  input.value = ''
+  return value
+}
 
 //from a full kanji and kana word or phrase, it extracts only the kanji
 const getKanjiArray = (word) =>{
-  kanjiArray = []
+  let kanjiArray = []
   //iteration of a string
   for (const c of word) {
     //console.log(c, c.charCodeAt())//unicode in dec
@@ -106,7 +103,7 @@ const wordsSharingOnyomi = (term) =>{
       })
       if(sameOnyomi.length > 1){
         printOnScreen('wordsSharingOnyomiContainer', `Onyomi: ${on}`)
-        //printList('wordsSharingOnyomiContainer', sameOnyomi)
+        printList('wordsSharingOnyomiContainer', sameOnyomi.map(e=>e.word), sameOnyomi.map(e=>e.reading))
       }
     })
   })
@@ -131,8 +128,8 @@ const printOnScreen = (containerId, string) =>{
 }
 
 const showRelatedKanji = () =>{
-  let input = document.getElementById('searchKanji')
-  wordsSharingKanji(input.value)
+  let input = inputValue('searchKanji')
+  wordsSharingKanji(input)
 }
 
 
