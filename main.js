@@ -1,31 +1,44 @@
-//const url = 'https://kanjiapi.dev/v1/kanji/蛍'
- //array with the word's kanji (minus hiragana and katakana)
-let kanjiData = []
-let allWords = []
+//api = 'https://kanjiapi.dev/v1/kanji/蛍'
+let allWords = []//stores the full words the user inputs into the app
+
+const checkExistingData = () =>{
+  let storedData = window.localStorage.getItem('userInput')
+  if(storedData){allWords = JSON.parse(storedData)} 
+  console.log(allWords)
+}
+
+checkExistingData()
 
 const confirm = () =>{
     let kanji = inputValue('kanjiInput')
-    let reading = inputValue('readingInput')
-    let anotation = inputValue('anotationInput')
-    let kanjiArray = getKanjiArray(kanji)//creates an array with only the kanji (no hiragana or katakana)
+    if(kanji !== ''){
+      let reading = inputValue('readingInput')
+      let anotation = inputValue('anotationInput')
+      let kanjiArray = getKanjiArray(kanji)//creates an array with only the kanji (no hiragana or katakana)
 
-    kanjiArray.forEach((e, index)=>{
-      let url = 'https://kanjiapi.dev/v1/kanji/'+e
-      fetch(url)
-          .then(res=>res.json())
-          .then(data=>{
-            console.log(data)
-            let newInternalKanji = new internalKanji(data.kanji, data.jlpt, data.kun_readings, data.on_readings, data.meanings)
-            kanjiArray[index] = newInternalKanji
-            console.log(allWords)
-          })
-          .catch(error=>console.log(error))
-    })
+      kanjiArray.forEach((e, index)=>{
+        let url = 'https://kanjiapi.dev/v1/kanji/'+e
+        fetch(url)
+            .then(res=>res.json())
+            .then(data=>{
+              console.log(data)
+              let newInternalKanji = new internalKanji(data.kanji, data.jlpt, data.kun_readings, data.on_readings, data.meanings)
+              kanjiArray[index] = newInternalKanji
+              console.log(allWords)
+            })
+            .catch(error=>console.log(error))
+      })
 
-    let newWord = new storedWord(kanji, reading, anotation, kanjiArray)
-    allWords.push(newWord)    
+      let newWord = new storedWord(kanji, reading, anotation, kanjiArray)
+      allWords.push(newWord)  
+      //local storage
+      let parsedData = JSON.stringify(allWords)  
+      window.localStorage.setItem('userInput', parsedData)
+    }
+    
 }
 
+//receives the id of an input, takes the value, cleans the HTML and returns input.value
 const inputValue = (inputId) =>{
   let input = document.getElementById(inputId)
   let value = input.value
