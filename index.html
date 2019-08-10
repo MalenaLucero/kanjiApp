@@ -4,23 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Kanji Connect</title>
     <script src="main.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="style/style.css"></link>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap" rel="stylesheet">
 </head>
-<body>
-    <form>
+<body onload="initialize()">
+    <header>
+        <h1>Kanji Connect</h1>
+    </header>
+    <form class="newKanjiForm">
+        <label for="kanjiInput">New kanji:</label>
         <input id="kanjiInput">
+        <label for="readingInput">Reading (optional but recommended):</label>
         <input id="readingInput">
-        <input id="anotationInput">
+        <label for="anotationInput">Anotation (optional):</label>
+        <input id="anotationInput" class="anotation">
         <button type="button" onclick="confirm()">Confirm</button>
     </form>
-    <div>
+    <!--<div>
+        <label for="searKanji">Search related kanji:</label>
         <input id="searchKanji">
         <button type="button" onclick="showRelatedKanji()">Show words sharing kanji</button>
         
         <div id="wordsSharingKanjiContainer"></div>
         
         <div id="wordsSharingOnyomiContainer"></div>
+    </div>-->
+    <div class="relatedKanji">
+        <h3>Related Kanji</h3>
+        <div class="japanese" id="wordsSharingKanjiContainer"></div>
+        <div class="japanese" id="wordsSharingOnyomiContainer"></div>
     </div>
 </body>
 </html>

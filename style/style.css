@@ -1,0 +1,49 @@
+ul {
+  list-style: none;
+}
+
+body {
+  background-color: #f1d4d4;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+body header h1 {
+  color: #484c7f;
+  text-align: center;
+}
+body .newKanjiForm {
+  padding: 10px;
+  background-color: #ddb6c6;
+}
+body label {
+  display: block;
+  margin-bottom: 10px;
+}
+body input {
+  width: 100%;
+  border: none;
+  margin-bottom: 10px;
+  height: 20px;
+  border: 1px solid white;
+  font-family: "Noto Sans JP", sans-serif;
+}
+body input.anotation {
+  height: 50px;
+}
+body input:focus {
+  outline: none !important;
+  border: 1px solid #484c7f;
+}
+body .relatedKanji {
+  margin-top: 40px;
+}
+body .relatedKanji h3 {
+  text-align: center;
+  color: #484c7f;
+}
+
+.japanese {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+/*# sourceMappingURL=style.css.map */

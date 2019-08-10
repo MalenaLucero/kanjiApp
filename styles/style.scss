@@ -1,0 +1,59 @@
+$dark-color: #484c7f;
+$main-color: #ac8daf;
+$light-color: #ddb6c6;
+$background-color: #f1d4d4;
+$small-margin: 10px;
+$big-margin: 40px;
+$English-font: 'Montserrat', sans-serif;
+$Japanese-font: 'Noto Sans JP', sans-serif;
+
+ul{
+    list-style: none;
+}
+
+body{
+    background-color: $background-color;
+    box-sizing: border-box;
+    font-family: $English-font;
+    header{
+        h1{
+            color: $dark-color;
+            text-align: center;
+        }
+    }
+    .newKanjiForm{
+        padding: $small-margin;
+        background-color: $light-color;
+    }
+    label{
+        display: block;
+        margin-bottom: $small-margin;
+    }
+    input{
+        width: 100%;
+        border: none;
+        margin-bottom: $small-margin;
+        height: 20px;
+        border: 1px solid white;
+        font-family: $Japanese-font;
+        &.anotation{
+            height: 50px;;
+        }
+        &:focus{
+            outline: none !important;
+            border: 1px solid $dark-color;
+        }
+    }
+    .relatedKanji{
+        margin-top: $big-margin;
+        h3{
+            text-align: center;
+            color: $dark-color;
+        }
+    }
+}
+
+.japanese{
+    font-family: $Japanese-font;
+}
+

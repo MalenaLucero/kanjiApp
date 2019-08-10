@@ -9,6 +9,10 @@ const checkExistingData = () =>{
 
 checkExistingData()
 
+const initialize = () =>{
+  wordsSharingKanji(allWords[allWords.length - 1].word)
+}
+
 const confirm = () =>{
     let kanji = inputValue('kanjiInput')
     if(kanji !== ''){
@@ -28,10 +32,10 @@ const confirm = () =>{
               //local storage
               let parsedData = JSON.stringify(allWords)  
               window.localStorage.setItem('locallyStoredData', parsedData)
+              wordsSharingKanji(allWords[allWords.length - 1].word)
             })
             .catch(error=>console.log(error))
       })
-
       let newWord = new storedWord(kanji, reading, anotation, kanjiArray)
       allWords.push(newWord)  
       
