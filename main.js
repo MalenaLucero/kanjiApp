@@ -2,7 +2,7 @@
 let allWords = []//stores the full words the user inputs into the app
 
 const checkExistingData = () =>{
-  let storedData = window.localStorage.getItem('userInput')
+  let storedData = window.localStorage.getItem('locallyStoredData')
   if(storedData){allWords = JSON.parse(storedData)} 
   console.log(allWords)
 }
@@ -25,15 +25,16 @@ const confirm = () =>{
               let newInternalKanji = new internalKanji(data.kanji, data.jlpt, data.kun_readings, data.on_readings, data.meanings)
               kanjiArray[index] = newInternalKanji
               console.log(allWords)
+              //local storage
+              let parsedData = JSON.stringify(allWords)  
+              window.localStorage.setItem('locallyStoredData', parsedData)
             })
             .catch(error=>console.log(error))
       })
 
       let newWord = new storedWord(kanji, reading, anotation, kanjiArray)
       allWords.push(newWord)  
-      //local storage
-      let parsedData = JSON.stringify(allWords)  
-      window.localStorage.setItem('userInput', parsedData)
+      
     }
     
 }
@@ -144,6 +145,8 @@ const showRelatedKanji = () =>{
   let input = inputValue('searchKanji')
   wordsSharingKanji(input)
 }
+
+
 
 
 
