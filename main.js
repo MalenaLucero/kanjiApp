@@ -10,7 +10,10 @@ const checkExistingData = () =>{
 checkExistingData()
 
 const initialize = () =>{
+  innerHTMLCleaner("wordsSharingKanjiContainer")
   wordsSharingKanji(allWords[allWords.length - 1].word)
+  innerHTMLCleaner("wordsSharingOnyomiContainer")
+  wordsSharingOnyomi(allWords[allWords.length - 1].word)
 }
 
 const confirm = () =>{
@@ -87,20 +90,20 @@ const wordsSharingKanji = (term) =>{
   let same
   let termsKanji = getKanjiArray(term)
   termsKanji.forEach(kanji=>{
-    let sameKanji = []
-    sameKanji = allWords.filter(word=>{
+    let sameKanjiWords = []
+    sameKanjiWords = allWords.filter(word=>{
       same = false
       word.kanjiList.forEach(intKanji=>{
         if(kanji === intKanji.kanji) same = true
       })
       if(same) return word
     })
-    if(sameKanji.length > 1){
+    sameKanjiWords.splice(sameKanjiWords.indexOf(sameKanjiWords.find(e=>e.word === term)), 1)
+    if(sameKanjiWords.length > 0){
       printOnScreen('wordsSharingKanjiContainer', `Kanji: ${kanji}`)
-      printList('wordsSharingKanjiContainer', sameKanji.map(e=>e.word), sameKanji.map(e=>e.reading))
+      printList('wordsSharingKanjiContainer', sameKanjiWords.map(e=>e.word), sameKanjiWords.map(e=>e.reading))
     }
   })
-  wordsSharingOnyomi(term)
 }
 
 //receives a string
@@ -119,7 +122,8 @@ const wordsSharingOnyomi = (term) =>{
         })
         if(same) return word
       })
-      if(sameOnyomi.length > 1){
+      sameOnyomi.splice(sameOnyomi.indexOf(sameOnyomi.find(e=>e.word === term)), 1)
+      if(sameOnyomi.length > 0){
         printOnScreen('wordsSharingOnyomiContainer', `Onyomi: ${on}`)
         printList('wordsSharingOnyomiContainer', sameOnyomi.map(e=>e.word), sameOnyomi.map(e=>e.reading))
       }
@@ -148,6 +152,11 @@ const printOnScreen = (containerId, string) =>{
 const showRelatedKanji = () =>{
   let input = inputValue('searchKanji')
   wordsSharingKanji(input)
+}
+
+const innerHTMLCleaner = (containerId) =>{
+  let container = document.getElementById(containerId)
+  container.innerHTML = ''
 }
 
 
