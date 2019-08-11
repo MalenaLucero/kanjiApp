@@ -16,13 +16,13 @@
     </header>
     <nav class="mainNav">
         <ul>
-            <li><a href="#">Add kanji</a></li>
-            <li><a href="#">Search</a></li>
-            <li><a href="#">JLPT list</a></li>
+            <li><a href="#" onclick="addKanjiSection()">Add kanji</a></li>
+            <li><a href="#" onclick="searchSection()">Search</a></li>
+            <li><a href="#" onclick="jlptSection()">JLPT list</a></li>
         </ul>
     </nav>
-    <section>
-        <form class="newKanjiForm hide">
+    <section class="addKanjiSection show" id="addKanjiSection">
+        <form class="newKanjiForm">
             <label for="kanjiInput">New kanji:</label>
             <input id="kanjiInput">
             <div class="inputError" id="kanjiInputError"></div>
@@ -32,13 +32,12 @@
             <input id="anotationInput" class="anotation">
             <a href="#" onclick="confirm()">Add new kanji</a>
         </form>
-        <div class="relatedKanji hide" id="relatedKanji">
+        <div class="relatedKanji" id="relatedKanji">
             <h3>Related Kanji</h3>
-            <div class="kanjiCompared japanese" id="kanjiCompared"></div>
-            <div class="wordsSharingKanji japanese" id="wordsSharingKanjiContainer"></div>
+            <div class="japanese" id="relatedKanjiContainer"></div>
         </div>
     </section>
-    <section>
+    <section class="searchSection hide" id="searchSection">
         <form class="search" id="search">
             <label for="searchKanji">Search kanji:</label>
             <input id="searchKanji">
@@ -46,9 +45,11 @@
         </form>
         <div class="relatedKanji" id="relatedKanji">
             <h3>Related Kanji</h3>
+            <div class="isKanjiStored" id="isKanjiStored"></div>
             <div class="japanese" id="searchInfoContainer"></div>
         </div>
     </section>
-    
+    <section class="jlptSection hide" id="jlptSection">
+    </section>
 </body>
 </html>

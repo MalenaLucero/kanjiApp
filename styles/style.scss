@@ -115,6 +115,11 @@ body{
             color: $dark-color;
             margin-bottom: $small-margin;
         }
+        .isKanjiStored{
+            background-color: $background-color;
+            margin-bottom: 0;
+            text-align: center;
+        }
         .kanjiCompared{
             background-color: $background-color;
             text-align: center;
@@ -160,5 +165,9 @@ body{
 
 .hide{
     display: none;
+}
+
+.show{
+    display: block;
 }
 

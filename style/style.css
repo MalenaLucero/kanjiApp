@@ -82,6 +82,11 @@ body .relatedKanji h3 {
   color: #484c7f;
   margin-bottom: 10px;
 }
+body .relatedKanji .isKanjiStored {
+  background-color: #f1d4d4;
+  margin-bottom: 0;
+  text-align: center;
+}
 body .relatedKanji .kanjiCompared {
   background-color: #f1d4d4;
   text-align: center;
@@ -140,6 +145,10 @@ body .search a {
 
 .hide {
   display: none;
+}
+
+.show {
+  display: block;
 }
 
 /*# sourceMappingURL=style.css.map */

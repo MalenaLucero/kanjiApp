@@ -33,7 +33,7 @@ const confirm = () =>{
               //local storage
               let parsedData = JSON.stringify(allWords)  
               window.localStorage.setItem('locallyStoredData', parsedData)
-              printRelatedWords(allWords[allWords.length - 1].word)
+              printRelatedWords(allWords[allWords.length - 1].word, 'relatedKanjiContainer')
             })
             .catch(error=>console.log(error))
       })
@@ -47,20 +47,6 @@ const alreadyExistingKanji = (newKanji) =>{
   let existingKanji = false
   allWords.forEach(words=>{if(words.word === newKanji) existingKanji = true})
   return existingKanji
-}
-
-const printRelatedWords = (newWord) =>{
-  innerHTMLCleaner('wordsSharingKanjiContainer')
-  innerHTMLCleaner('kanjiCompared')
-  printOnScreen('kanjiCompared', `Word: ${newWord}`)
-  let kanjiRelatedWords = wordsSharingKanji(newWord)
-  let kanjiArray = getKanjiArray(newWord)
-  kanjiRelatedWords.forEach((words, index)=>{
-    if(words.length !== 0){
-      printOnScreen('wordsSharingKanjiContainer', `Words sharing 「${kanjiArray[index]}」 kanji:`)
-      printList('wordsSharingKanjiContainer', words.map(e=>e.word), words.map(e=>e.reading))
-    }
-  })
 }
 
 //receives the id of an input, takes the value, cleans the HTML and returns input.value
@@ -165,7 +151,11 @@ const printOnScreen = (containerId, string) =>{
 
 const searchKanjiInfo = () =>{
   let input = inputValue('searchKanji')
-  if(input !== '') printRelatedWordsSearch(input, 'searchInfoContainer')
+  innerHTMLCleaner('isKanjiStored')
+  if(input !== '') {
+    printRelatedWords(input, 'searchInfoContainer')
+    alreadyExistingKanji(input) ? printOnScreen('isKanjiStored', 'This word is on your list') : printOnScreen('isKanjiStored', 'This word in not on your list')
+  }
 }
 
 const innerHTMLCleaner = (containerId) =>{
@@ -173,7 +163,7 @@ const innerHTMLCleaner = (containerId) =>{
   container.innerHTML = ''
 }
 
-const printRelatedWordsSearch = (newWord, containerId) =>{
+const printRelatedWords = (newWord, containerId) =>{
   innerHTMLCleaner(containerId)
   printOnScreen(containerId, `Word: ${newWord}`)
   let kanjiRelatedWords = wordsSharingKanji(newWord)
@@ -186,6 +176,34 @@ const printRelatedWordsSearch = (newWord, containerId) =>{
   })
 }
 
+//main nav functions
+const addKanjiSection = () =>{
+  showElement('addKanjiSection')
+  hideElement('searchSection')
+  hideElement('jlptSection')
+}
+
+const searchSection = () =>{
+  hideElement('addKanjiSection')
+  showElement('searchSection')
+  hideElement('jlptSection')
+}
+
+const jlptSection = () =>{
+  hideElement('addKanjiSection')
+  hideElement('searchSection')
+  showElement('jlptSection')
+}
+
+const showElement = (elementId) =>{
+  let element = document.getElementById(elementId)
+  element.classList.replace('hide', 'show')
+}
+
+const hideElement = (elementId) =>{
+  let element = document.getElementById(elementId)
+  element.classList.replace('show', 'hide')
+}
 
 
 
@@ -194,3 +212,5 @@ const printRelatedWordsSearch = (newWord, containerId) =>{
 
 
 
+
+ 
