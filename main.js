@@ -10,15 +10,17 @@ const checkExistingData = () =>{
 checkExistingData()
 
 const initialize = () =>{
-  innerHTMLCleaner("wordsSharingKanjiContainer")
+  /*innerHTMLCleaner("wordsSharingKanjiContainer")
   wordsSharingKanji(allWords[allWords.length - 1].word)
   innerHTMLCleaner("wordsSharingOnyomiContainer")
-  wordsSharingOnyomi(allWords[allWords.length - 1].word)
+  wordsSharingOnyomi(allWords[allWords.length - 1].word)*/
+
 }
 
 const confirm = () =>{
     let kanji = inputValue('kanjiInput')
-    if(kanji !== ''){
+    innerHTMLCleaner('kanjiInputError')
+    if(kanji !== '' && !alreadyExistingKanji(kanji)){
       let reading = inputValue('readingInput')
       let anotation = inputValue('anotationInput')
       let kanjiArray = getKanjiArray(kanji)//creates an array with only the kanji (no hiragana or katakana)
@@ -35,15 +37,32 @@ const confirm = () =>{
               //local storage
               let parsedData = JSON.stringify(allWords)  
               window.localStorage.setItem('locallyStoredData', parsedData)
-              wordsSharingKanji(allWords[allWords.length - 1].word)
+              printRelatedWords(allWords[allWords.length - 1].word)
             })
             .catch(error=>console.log(error))
       })
+
       let newWord = new storedWord(kanji, reading, anotation, kanjiArray)
       allWords.push(newWord)  
-      
+    }else(printOnScreen('kanjiInputError', 'Kanji already exists or input is empty'))
+}
+
+const alreadyExistingKanji = (newKanji) =>{
+  let existingKanji = false
+  allWords.forEach(words=>{if(words.word === newKanji) existingKanji = true})
+  return existingKanji
+}
+
+const printRelatedWords = (newWord) =>{
+  innerHTMLCleaner('wordsSharingKanjiContainer')
+  let kanjiRelatedWords = wordsSharingKanji(newWord)
+  let kanjiArray = getKanjiArray(newWord)
+  kanjiRelatedWords.forEach((words, index)=>{
+    if(words.length !== 0){
+      printOnScreen('wordsSharingKanjiContainer', `Words sharing 「${kanjiArray[index]}」 kanji:`)
+      printList('wordsSharingKanjiContainer', words.map(e=>e.word), words.map(e=>e.reading))
     }
-    
+  })
 }
 
 //receives the id of an input, takes the value, cleans the HTML and returns input.value
@@ -85,26 +104,21 @@ function internalKanji(kanji, jlpt, kun_readings, on_readings, meaning){
   this.meaning = meaning
 }
 
-//receives a string
+//receives a string and returns an array
 const wordsSharingKanji = (term) =>{
-  innerHTMLCleaner("wordsSharingKanjiContainer")
   let same
+  let sameKanjiWords = []
   let termsKanji = getKanjiArray(term)
-  termsKanji.forEach(kanji=>{
-    let sameKanjiWords = []
-    sameKanjiWords = allWords.filter(word=>{
+  termsKanji.forEach((kanji, index)=>{
+    sameKanjiWords[index] = allWords.filter(word=>{
       same = false
       word.kanjiList.forEach(intKanji=>{
         if(kanji === intKanji.kanji) same = true
       })
-      if(same) return word
+      if(same && word.word !== term) return word
     })
-    sameKanjiWords.splice(sameKanjiWords.indexOf(sameKanjiWords.find(e=>e.word === term)), 1)
-    if(sameKanjiWords.length > 0){
-      printOnScreen('wordsSharingKanjiContainer', `Words sharing 「${kanji}」 kanji:`)
-      printList('wordsSharingKanjiContainer', sameKanjiWords.map(e=>e.word), sameKanjiWords.map(e=>e.reading))
-    }
   })
+  return sameKanjiWords
 }
 
 //receives a string
