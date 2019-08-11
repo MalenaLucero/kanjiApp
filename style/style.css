@@ -2,6 +2,14 @@ ul {
   list-style: none;
 }
 
+a {
+  text-decoration: none;
+  padding: 10px 20px;
+  color: #f1d4d4;
+  background-color: #484c7f;
+  display: inline-block;
+}
+
 body {
   background-color: #f1d4d4;
   box-sizing: border-box;
@@ -14,6 +22,12 @@ body header h1 {
 body .newKanjiForm {
   padding: 10px;
   background-color: #ddb6c6;
+  max-width: 400px;
+  margin: 0 auto;
+}
+body .newKanjiForm a {
+  display: block;
+  text-align: center;
 }
 body label {
   display: block;
@@ -40,6 +54,21 @@ body .relatedKanji {
 body .relatedKanji h3 {
   text-align: center;
   color: #484c7f;
+}
+body .relatedKanji div {
+  background-color: #ddb6c6;
+  padding: 10px;
+  margin-bottom: 40px;
+}
+body .relatedKanji div p {
+  color: #484c7f;
+  margin: 0 0 10px;
+}
+body .relatedKanji div ul {
+  margin: 0 0 20px;
+}
+body .relatedKanji div ul:last-of-type {
+  margin-bottom: 0;
 }
 
 .japanese {

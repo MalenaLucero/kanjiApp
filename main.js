@@ -87,6 +87,7 @@ function internalKanji(kanji, jlpt, kun_readings, on_readings, meaning){
 
 //receives a string
 const wordsSharingKanji = (term) =>{
+  innerHTMLCleaner("wordsSharingKanjiContainer")
   let same
   let termsKanji = getKanjiArray(term)
   termsKanji.forEach(kanji=>{
@@ -100,7 +101,7 @@ const wordsSharingKanji = (term) =>{
     })
     sameKanjiWords.splice(sameKanjiWords.indexOf(sameKanjiWords.find(e=>e.word === term)), 1)
     if(sameKanjiWords.length > 0){
-      printOnScreen('wordsSharingKanjiContainer', `Kanji: ${kanji}`)
+      printOnScreen('wordsSharingKanjiContainer', `Words sharing 「${kanji}」 kanji:`)
       printList('wordsSharingKanjiContainer', sameKanjiWords.map(e=>e.word), sameKanjiWords.map(e=>e.reading))
     }
   })
@@ -108,6 +109,7 @@ const wordsSharingKanji = (term) =>{
 
 //receives a string
 const wordsSharingOnyomi = (term) =>{
+  innerHTMLCleaner("wordsSharingOnyomiContainer")
   let termObject = allWords.find(e=> {if(e.word===term) return e})
   let same = false
   termObject.kanjiList.forEach(kanji=>{
@@ -124,7 +126,7 @@ const wordsSharingOnyomi = (term) =>{
       })
       sameOnyomi.splice(sameOnyomi.indexOf(sameOnyomi.find(e=>e.word === term)), 1)
       if(sameOnyomi.length > 0){
-        printOnScreen('wordsSharingOnyomiContainer', `Onyomi: ${on}`)
+        printOnScreen('wordsSharingOnyomiContainer', `Words sharing 「${on}」 onyomi:`)
         printList('wordsSharingOnyomiContainer', sameOnyomi.map(e=>e.word), sameOnyomi.map(e=>e.reading))
       }
     })
