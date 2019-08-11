@@ -22,19 +22,28 @@ body header h1 {
 body .mainNav ul {
   display: flex;
   padding: 0;
-  margin: 0;
+  max-width: 400px;
+  margin: 0 auto;
+}
+body .mainNav ul li {
+  border-top-right-radius: 15px;
 }
 body .mainNav ul li:nth-of-type(1) {
   background-color: #ddb6c6;
+  color: #484c7f;
 }
 body .mainNav ul li:nth-of-type(2) {
   background-color: #ac8daf;
+  color: #484c7f;
 }
 body .mainNav ul li:nth-of-type(3) {
   background-color: #484c7f;
+  color: #f1d4d4;
 }
 body .mainNav ul li a {
   background-color: inherit;
+  color: inherit;
+  border-radius: inherit;
 }
 body .newKanjiForm {
   padding: 10px;
@@ -54,7 +63,7 @@ body input {
   width: 100%;
   border: none;
   margin-bottom: 10px;
-  height: 20px;
+  height: 25px;
   border: 1px solid white;
   font-family: "Noto Sans JP", sans-serif;
 }
@@ -71,11 +80,18 @@ body .relatedKanji {
 body .relatedKanji h3 {
   text-align: center;
   color: #484c7f;
+  margin-bottom: 10px;
+}
+body .relatedKanji .kanjiCompared {
+  background-color: #f1d4d4;
+  text-align: center;
+  margin: 0 0 10px;
+  padding: 0;
 }
 body .relatedKanji div {
   background-color: #ddb6c6;
   padding: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 body .relatedKanji div p {
   color: #484c7f;

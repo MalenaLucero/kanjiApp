@@ -10,11 +10,7 @@ const checkExistingData = () =>{
 checkExistingData()
 
 const initialize = () =>{
-  /*innerHTMLCleaner("wordsSharingKanjiContainer")
-  wordsSharingKanji(allWords[allWords.length - 1].word)
-  innerHTMLCleaner("wordsSharingOnyomiContainer")
-  wordsSharingOnyomi(allWords[allWords.length - 1].word)*/
-
+  printRelatedWords(allWords[allWords.length - 1].word)
 }
 
 const confirm = () =>{
@@ -55,6 +51,8 @@ const alreadyExistingKanji = (newKanji) =>{
 
 const printRelatedWords = (newWord) =>{
   innerHTMLCleaner('wordsSharingKanjiContainer')
+  innerHTMLCleaner('kanjiCompared')
+  printOnScreen('kanjiCompared', `Word: ${newWord}`)
   let kanjiRelatedWords = wordsSharingKanji(newWord)
   let kanjiArray = getKanjiArray(newWord)
   kanjiRelatedWords.forEach((words, index)=>{
@@ -63,6 +61,7 @@ const printRelatedWords = (newWord) =>{
       printList('wordsSharingKanjiContainer', words.map(e=>e.word), words.map(e=>e.reading))
     }
   })
+
 }
 
 //receives the id of an input, takes the value, cleans the HTML and returns input.value
