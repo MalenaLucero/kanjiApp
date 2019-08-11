@@ -20,6 +20,26 @@ a{
     display: inline-block;
 }
 
+@mixin form($backgroundColor, $borderColor){
+    background-color: $backgroundColor;
+    padding: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+    label{
+        display: block;
+        margin-bottom: 10px;
+    }
+    input{
+        width: 100%;
+        margin-bottom: 10px;
+        height: 25px;
+        border: 1px solid white;
+        &:focus{
+            border: 1px solid $borderColor;
+        }
+    }
+}
+
 body{
     background-color: $background-color;
     box-sizing: border-box;
@@ -106,6 +126,7 @@ body{
             padding: $small-margin;
             margin-bottom: $medium-margin;
             p{
+
                 color: $dark-color;
                 margin: 0 0 $small-margin;
             }
@@ -115,6 +136,13 @@ body{
                     margin-bottom: 0;
                 }
             }
+        }
+    }
+    .search{
+        @include form($main-color, $dark-color);
+        a{
+            display: block;
+            text-align: center;
         }
     }
 }
@@ -128,5 +156,9 @@ body{
     p{
         margin: 0 $small-margin $small-margin;
     }
+}
+
+.hide{
+    display: none;
 }
 

@@ -103,6 +103,29 @@ body .relatedKanji div ul {
 body .relatedKanji div ul:last-of-type {
   margin-bottom: 0;
 }
+body .search {
+  background-color: #ac8daf;
+  padding: 10px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+body .search label {
+  display: block;
+  margin-bottom: 10px;
+}
+body .search input {
+  width: 100%;
+  margin-bottom: 10px;
+  height: 25px;
+  border: 1px solid white;
+}
+body .search input:focus {
+  border: 1px solid #484c7f;
+}
+body .search a {
+  display: block;
+  text-align: center;
+}
 
 .japanese {
   font-family: "Noto Sans JP", sans-serif;
@@ -113,6 +136,10 @@ body .relatedKanji div ul:last-of-type {
 }
 .inputError p {
   margin: 0 10px 10px;
+}
+
+.hide {
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */

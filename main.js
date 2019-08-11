@@ -10,7 +10,7 @@ const checkExistingData = () =>{
 checkExistingData()
 
 const initialize = () =>{
-  printRelatedWords(allWords[allWords.length - 1].word)
+  
 }
 
 const confirm = () =>{
@@ -61,7 +61,6 @@ const printRelatedWords = (newWord) =>{
       printList('wordsSharingKanjiContainer', words.map(e=>e.word), words.map(e=>e.reading))
     }
   })
-
 }
 
 //receives the id of an input, takes the value, cleans the HTML and returns input.value
@@ -164,14 +163,27 @@ const printOnScreen = (containerId, string) =>{
   div.appendChild(p)
 }
 
-const showRelatedKanji = () =>{
+const searchKanjiInfo = () =>{
   let input = inputValue('searchKanji')
-  wordsSharingKanji(input)
+  if(input !== '') printRelatedWordsSearch(input, 'searchInfoContainer')
 }
 
 const innerHTMLCleaner = (containerId) =>{
   let container = document.getElementById(containerId)
   container.innerHTML = ''
+}
+
+const printRelatedWordsSearch = (newWord, containerId) =>{
+  innerHTMLCleaner(containerId)
+  printOnScreen(containerId, `Word: ${newWord}`)
+  let kanjiRelatedWords = wordsSharingKanji(newWord)
+  let kanjiArray = getKanjiArray(newWord)
+  kanjiRelatedWords.forEach((words, index)=>{
+    if(words.length !== 0){
+      printOnScreen(containerId, `Words sharing 「${kanjiArray[index]}」 kanji:`)
+      printList(containerId, words.map(e=>e.word), words.map(e=>e.reading))
+    }
+  })
 }
 
 

@@ -21,30 +21,34 @@
             <li><a href="#">JLPT list</a></li>
         </ul>
     </nav>
-    <form class="newKanjiForm">
-        <label for="kanjiInput">New kanji:</label>
-        <input id="kanjiInput">
-        <div class="inputError" id="kanjiInputError"></div>
-        <label for="readingInput">Reading:</label>
-        <input id="readingInput">
-        <label for="anotationInput">Anotation:</label>
-        <input id="anotationInput" class="anotation">
-        <a href="#" onclick="confirm()">Add new kanji</a>
-    </form>
-    <!--<div>
-        <label for="searKanji">Search related kanji:</label>
-        <input id="searchKanji">
-        <button type="button" onclick="showRelatedKanji()">Show words sharing kanji</button>
-        
-        <div id="wordsSharingKanjiContainer"></div>
-        
-        <div id="wordsSharingOnyomiContainer"></div>
-    </div>-->
-    <div class="relatedKanji">
-        <h3>Related Kanji</h3>
-        <div class="kanjiCompared japanese" id="kanjiCompared"></div>
-        <div class="wordsSharingKanji japanese" id="wordsSharingKanjiContainer"></div>
-        <!--<div class="wordsSharingOnyomi japanese" id="wordsSharingOnyomiContainer"></div>-->
-    </div>
+    <section>
+        <form class="newKanjiForm hide">
+            <label for="kanjiInput">New kanji:</label>
+            <input id="kanjiInput">
+            <div class="inputError" id="kanjiInputError"></div>
+            <label for="readingInput">Reading:</label>
+            <input id="readingInput">
+            <label for="anotationInput">Anotation:</label>
+            <input id="anotationInput" class="anotation">
+            <a href="#" onclick="confirm()">Add new kanji</a>
+        </form>
+        <div class="relatedKanji hide" id="relatedKanji">
+            <h3>Related Kanji</h3>
+            <div class="kanjiCompared japanese" id="kanjiCompared"></div>
+            <div class="wordsSharingKanji japanese" id="wordsSharingKanjiContainer"></div>
+        </div>
+    </section>
+    <section>
+        <form class="search" id="search">
+            <label for="searchKanji">Search kanji:</label>
+            <input id="searchKanji">
+            <a href="#" onclick="searchKanjiInfo()">Show kanji info</a>
+        </form>
+        <div class="relatedKanji" id="relatedKanji">
+            <h3>Related Kanji</h3>
+            <div class="japanese" id="searchInfoContainer"></div>
+        </div>
+    </section>
+    
 </body>
 </html>
