@@ -19,6 +19,23 @@ body header h1 {
   color: #484c7f;
   text-align: center;
 }
+body .mainNav ul {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+body .mainNav ul li:nth-of-type(1) {
+  background-color: #ddb6c6;
+}
+body .mainNav ul li:nth-of-type(2) {
+  background-color: #ac8daf;
+}
+body .mainNav ul li:nth-of-type(3) {
+  background-color: #484c7f;
+}
+body .mainNav ul li a {
+  background-color: inherit;
+}
 body .newKanjiForm {
   padding: 10px;
   background-color: #ddb6c6;
@@ -73,6 +90,13 @@ body .relatedKanji div ul:last-of-type {
 
 .japanese {
   font-family: "Noto Sans JP", sans-serif;
+}
+
+.inputError {
+  color: #484c7f;
+}
+.inputError p {
+  margin: 0 10px 10px;
 }
 
 /*# sourceMappingURL=style.css.map */

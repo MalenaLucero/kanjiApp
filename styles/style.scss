@@ -30,6 +30,28 @@ body{
             text-align: center;
         }
     }
+    .mainNav{
+        ul{
+            display: flex;
+            padding: 0;
+            margin: 0;
+            li{
+                &:nth-of-type(1){
+                    background-color: $light-color;
+                }
+                &:nth-of-type(2){
+                    background-color: $main-color;
+                }
+                &:nth-of-type(3){
+                    background-color: $dark-color;
+                }
+                a{
+                background-color: inherit;
+                }
+            }
+            
+        }
+    }
     .newKanjiForm{
         padding: $small-margin;
         background-color: $light-color;
@@ -85,5 +107,12 @@ body{
 
 .japanese{
     font-family: $Japanese-font;
+}
+
+.inputError{
+    color: $dark-color;
+    p{
+        margin: 0 $small-margin $small-margin;
+    }
 }
 
