@@ -88,7 +88,7 @@ function internalKanji(kanji, jlpt, kun_readings, on_readings, meaning){
   this.meaning = meaning
 }
 
-//receives a string and returns an array
+//receives a string and returns an array with internal arrays
 const wordsSharingKanji = (term) =>{
   let same
   let sameKanjiWords = []
