@@ -110,6 +110,8 @@ body{
     }
     .relatedKanji{
         margin-top: $big-margin;
+        max-width: 400px;
+        margin: 0 auto;
         h3{
             text-align: center;
             color: $dark-color;

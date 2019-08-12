@@ -9,10 +9,6 @@ const checkExistingData = () =>{
 
 checkExistingData()
 
-const initialize = () =>{
-  
-}
-
 const confirm = () =>{
     let kanji = inputValue('kanjiInput')
     innerHTMLCleaner('kanjiInputError')
@@ -20,7 +16,7 @@ const confirm = () =>{
       let reading = inputValue('readingInput')
       let anotation = inputValue('anotationInput')
       let kanjiArray = getKanjiArray(kanji)//creates an array with only the kanji (no hiragana or katakana)
-
+      showElement('mainRelatedKanji')
       kanjiArray.forEach((e, index)=>{
         let url = 'https://kanjiapi.dev/v1/kanji/'+e
         fetch(url)
@@ -151,6 +147,7 @@ const printOnScreen = (containerId, string) =>{
 
 const searchKanjiInfo = () =>{
   let input = inputValue('searchKanji')
+  showElement('secondaryRelatedKanji')
   innerHTMLCleaner('isKanjiStored')
   if(input !== '') {
     printRelatedWords(input, 'searchInfoContainer')

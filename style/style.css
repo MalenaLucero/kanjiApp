@@ -76,6 +76,8 @@ body input:focus {
 }
 body .relatedKanji {
   margin-top: 40px;
+  max-width: 400px;
+  margin: 0 auto;
 }
 body .relatedKanji h3 {
   text-align: center;
