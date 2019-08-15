@@ -166,9 +166,11 @@ const printRelatedWords = (newWord, containerId) =>{
   let kanjiRelatedWords = wordsSharingKanji(newWord)
   let kanjiArray = getKanjiArray(newWord)
   kanjiRelatedWords.forEach((words, index)=>{
+    printOnScreen(containerId, `Words sharing 「${kanjiArray[index]}」 kanji:`)
     if(words.length !== 0){
-      printOnScreen(containerId, `Words sharing 「${kanjiArray[index]}」 kanji:`)
       printList(containerId, words.map(e=>e.word), words.map(e=>e.reading))
+    }else{
+      printOnScreen(containerId, 'No words share this kanji')
     }
   })
 }
@@ -205,6 +207,7 @@ const allSection = () =>{
 
 const storedWordsList = () =>{
   const tbody = document.getElementById('storedWordsTable')
+  innerHTMLCleaner('storedWordsTable')
   allWords.reverse().forEach(e=>{
     let row = document.createElement('tr')
     row.appendChild(tableTd(e.word))
@@ -214,6 +217,7 @@ const storedWordsList = () =>{
     row.appendChild(tableTd(e.anotation))
     tbody.appendChild(row)
   })
+  allWords.reverse()
 }
 
 //I dont't know why this function returns undefined when receiving hiragana

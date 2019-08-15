@@ -40,6 +40,10 @@ body .mainNav ul li:nth-of-type(3) {
   background-color: #484c7f;
   color: #f1d4d4;
 }
+body .mainNav ul li:nth-of-type(4) {
+  color: #484c7f;
+  font-weight: bold;
+}
 body .mainNav ul li a {
   background-color: inherit;
   color: inherit;
@@ -67,10 +71,18 @@ body input {
   border: 1px solid white;
   font-family: "Noto Sans JP", sans-serif;
 }
-body input.anotation {
-  height: 50px;
-}
 body input:focus {
+  outline: none !important;
+  border: 1px solid #484c7f;
+}
+body textarea {
+  width: 100%;
+  height: 50px;
+  border: 1px solid white;
+  padding: 0;
+  margin-bottom: 10px;
+}
+body textarea:focus {
   outline: none !important;
   border: 1px solid #484c7f;
 }
@@ -132,6 +144,32 @@ body .search input:focus {
 body .search a {
   display: block;
   text-align: center;
+}
+body .allSection {
+  margin-top: 20px;
+}
+body .allSection table {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+  border-collapse: collapse;
+}
+body .allSection table thead {
+  background-color: #484c7f;
+  color: #f1d4d4;
+  font-family: "Montserrat", sans-serif;
+}
+body .allSection table thead th {
+  font-weight: normal;
+  padding: 10px;
+}
+body .allSection table tbody td {
+  text-align: center;
+  padding: 10px 0;
+}
+body .allSection table tbody tr {
+  border-bottom: 1px solid #f1d4d4;
+  background-color: #ddb6c6;
 }
 
 .japanese {
