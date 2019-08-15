@@ -178,18 +178,49 @@ const addKanjiSection = () =>{
   showElement('addKanjiSection')
   hideElement('searchSection')
   hideElement('jlptSection')
+  hideElement('allSection')
 }
 
 const searchSection = () =>{
   hideElement('addKanjiSection')
   showElement('searchSection')
   hideElement('jlptSection')
+  hideElement('allSection')
 }
 
 const jlptSection = () =>{
   hideElement('addKanjiSection')
   hideElement('searchSection')
   showElement('jlptSection')
+  hideElement('allSection')
+}
+
+const allSection = () =>{
+  hideElement('addKanjiSection')
+  hideElement('searchSection')
+  hideElement('jlptSection')
+  showElement('allSection')
+  storedWordsList()
+}
+
+const storedWordsList = () =>{
+  const tbody = document.getElementById('storedWordsTable')
+  allWords.reverse().forEach(e=>{
+    let row = document.createElement('tr')
+    row.appendChild(tableTd(e.word))
+    let reading = document.createElement('td')
+    reading.innerText = e.reading
+    row.appendChild(reading)
+    row.appendChild(tableTd(e.anotation))
+    tbody.appendChild(row)
+  })
+}
+
+//I dont't know why this function returns undefined when receiving hiragana
+const tableTd = (text) =>{
+  let td = document.createElement('td')
+  td.innerText = text
+  return td
 }
 
 const showElement = (elementId) =>{

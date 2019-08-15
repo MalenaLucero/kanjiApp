@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap" rel="stylesheet">
 </head>
-<body onload="initialize()">
+<body>
     <header>
         <h1>Kanji Connect</h1>
     </header>
@@ -19,6 +19,7 @@
             <li><a href="#" onclick="addKanjiSection()">Add kanji</a></li>
             <li><a href="#" onclick="searchSection()">Search</a></li>
             <li><a href="#" onclick="jlptSection()">JLPT list</a></li>
+            <li><a href="#" onclick="allSection()">All</a></li>
         </ul>
     </nav>
     <section class="addKanjiSection show" id="addKanjiSection">
@@ -50,6 +51,17 @@
         </div>
     </section>
     <section class="jlptSection hide" id="jlptSection">
+    </section>
+    <section class="allSection japanese hide" id="allSection">
+        <table>
+            <thead>
+                <th>Word</th>
+                <th>Reading</th> 
+                <th>Anotation</th>
+            </thead>
+            <tbody id="storedWordsTable">
+            </tbody>
+        </table>
     </section>
 </body>
 </html>
