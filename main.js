@@ -1,5 +1,5 @@
 //api = 'https://kanjiapi.dev/v1/kanji/蛍'
-let allWords = []//stores the full words the user inputs into the app
+let allWords = []//stores the full words the user inputs
 
 const checkExistingData = () =>{
   let storedData = window.localStorage.getItem('locallyStoredData')
@@ -22,10 +22,8 @@ const confirm = () =>{
         fetch(url)
             .then(res=>res.json())
             .then(data=>{
-              console.log(data)
               let newInternalKanji = new internalKanji(data.kanji, data.jlpt, data.kun_readings, data.on_readings, data.meanings)
               kanjiArray[index] = newInternalKanji
-              console.log(allWords)
               //local storage
               let parsedData = JSON.stringify(allWords)  
               window.localStorage.setItem('locallyStoredData', parsedData)
@@ -33,7 +31,6 @@ const confirm = () =>{
             })
             .catch(error=>console.log(error))
       })
-
       let newWord = new storedWord(kanji, reading, anotation, kanjiArray)
       allWords.push(newWord)  
     }else(printOnScreen('kanjiInputError', 'Kanji already exists or input is empty'))
@@ -236,6 +233,9 @@ const hideElement = (elementId) =>{
   let element = document.getElementById(elementId)
   element.classList.replace('show', 'hide')
 }
+
+//JLPT functions
+
 
 
 
