@@ -1,45 +1,54 @@
 //api = 'https://kanjiapi.dev/v1/kanji/蛍'
-let allWords = []//stores the full words the user inputs
+let userInput = {
+  allWords: [],//stores the full words the user inputs
+  allKanji: []//stores only the kanji of the words the user inputs, without repeating kanji
+}
 
 const checkExistingData = () =>{
   let storedData = window.localStorage.getItem('locallyStoredData')
-  if(storedData){allWords = JSON.parse(storedData)} 
-  console.log(allWords)
+  if(storedData){userInput = JSON.parse(storedData)} 
+  console.log(userInput)
 }
 
 checkExistingData()
 
 const confirm = () =>{
-    let kanji = inputValue('kanjiInput')
-    innerHTMLCleaner('kanjiInputError')
-    if(kanji !== '' && !alreadyExistingKanji(kanji)){
-      let reading = inputValue('readingInput')
-      let anotation = inputValue('anotationInput')
-      let kanjiArray = getKanjiArray(kanji)//creates an array with only the kanji (no hiragana or katakana)
+    let {allWords, allKanji} = userInput
+    let word = inputValue('wordInput')
+    innerHTMLCleaner('wordInputError')
+    if(word !== '' && !alreadyExistingItem(word, allWords.map(e=>e.word)) ){
+      let kanjiArray = getKanjiArray(word)
+      let newWord = new storedWord(word, inputValue('readingInput'), inputValue('anotationInput'), kanjiArray)
+      userInput.allWords.push(newWord)
+      setLocalStorage()
       showElement('mainRelatedKanji')
-      kanjiArray.forEach((e, index)=>{
-        let url = 'https://kanjiapi.dev/v1/kanji/'+e
-        fetch(url)
+      printRelatedWords(newWord, 'relatedKanjiContainer')
+      kanjiArray.forEach( e =>{
+        if(!alreadyExistingItem(e, allKanji.map(e=>e.kanji))){
+          fetch('https://kanjiapi.dev/v1/kanji/' + e)
             .then(res=>res.json())
-            .then(data=>{
-              let newInternalKanji = new internalKanji(data.kanji, data.jlpt, data.kun_readings, data.on_readings, data.meanings)
-              kanjiArray[index] = newInternalKanji
-              //local storage
-              let parsedData = JSON.stringify(allWords)  
-              window.localStorage.setItem('locallyStoredData', parsedData)
-              printRelatedWords(allWords[allWords.length - 1].word, 'relatedKanjiContainer')
+            .then(res=>{
+              let newKanji = new storedKanji(res.kanji, res.jlpt, res.kun_readings, res.on_readings, res.meanings)
+              userInput.allKanji.push(newKanji)
+              setLocalStorage()
             })
             .catch(error=>console.log(error))
+        }
       })
-      let newWord = new storedWord(kanji, reading, anotation, kanjiArray)
-      allWords.push(newWord)  
-    }else(printOnScreen('kanjiInputError', 'Kanji already exists or input is empty'))
+    }else(printOnScreen('wordInputError', 'Word already exists or input is empty'))
+    console.log(userInput)
 }
 
-const alreadyExistingKanji = (newKanji) =>{
-  let existingKanji = false
-  allWords.forEach(words=>{if(words.word === newKanji) existingKanji = true})
-  return existingKanji
+const setLocalStorage = () =>{
+  let parsedData = JSON.stringify(userInput)  
+  window.localStorage.setItem('locallyStoredData', parsedData)
+}
+
+//checks if a word or a kanji is already in an array
+const alreadyExistingItem = (newItem, arrayOfItems) =>{
+  let existingItem = false
+  arrayOfItems.forEach(item=>{if(item === newItem) existingItem = true})
+  return existingItem
 }
 
 //receives the id of an input, takes the value, cleans the HTML and returns input.value
@@ -73,7 +82,7 @@ function storedWord(word, reading, anotation, kanjiList){
 }
 
 //internal kanji constructor
-function internalKanji(kanji, jlpt, kun_readings, on_readings, meaning){
+function storedKanji(kanji, jlpt, kun_readings, on_readings, meaning){
   this.kanji = kanji
   this.jlpt = jlpt
   this.kun_readings = kun_readings
@@ -81,18 +90,19 @@ function internalKanji(kanji, jlpt, kun_readings, on_readings, meaning){
   this.meaning = meaning
 }
 
-//receives a string and returns an array with internal arrays
-const wordsSharingKanji = (term) =>{
+//receives a word and its list of kanji
+const wordsSharingKanji = (word, kanjiList) =>{
   let same
   let sameKanjiWords = []
-  let termsKanji = getKanjiArray(term)
-  termsKanji.forEach((kanji, index)=>{
-    sameKanjiWords[index] = allWords.filter(word=>{
-      same = false
-      word.kanjiList.forEach(intKanji=>{
-        if(kanji === intKanji.kanji) same = true
-      })
-      if(same && word.word !== term) return word
+  kanjiList.forEach((kanji, index)=>{
+    sameKanjiWords[index] = userInput.allWords.filter(e=>{
+      if(e.word !== word){
+        same = false
+        e.kanjiList.forEach(intKanji=>{
+          if(kanji === intKanji) same = true
+        })
+        if(same) return e
+      }
     })
   })
   return sameKanjiWords
@@ -158,12 +168,12 @@ const innerHTMLCleaner = (containerId) =>{
 }
 
 const printRelatedWords = (newWord, containerId) =>{
+  let {word, kanjiList} = newWord
   innerHTMLCleaner(containerId)
-  printOnScreen(containerId, `Word: ${newWord}`)
-  let kanjiRelatedWords = wordsSharingKanji(newWord)
-  let kanjiArray = getKanjiArray(newWord)
+  printOnScreen(containerId, `Word: ${word}`)
+  let kanjiRelatedWords = wordsSharingKanji(word, kanjiList)
   kanjiRelatedWords.forEach((words, index)=>{
-    printOnScreen(containerId, `Words sharing 「${kanjiArray[index]}」 kanji:`)
+    printOnScreen(containerId, `Words sharing 「${kanjiList[index]}」 kanji:`)
     if(words.length !== 0){
       printList(containerId, words.map(e=>e.word), words.map(e=>e.reading))
     }else{
@@ -206,7 +216,7 @@ const allSection = () =>{
 const storedWordsList = () =>{
   const tbody = document.getElementById('storedWordsTable')
   innerHTMLCleaner('storedWordsTable')
-  allWords.reverse().forEach(e=>{
+  userInput.allWords.reverse().forEach(e=>{
     let row = document.createElement('tr')
     row.appendChild(tableTd(e.word))
     let reading = document.createElement('td')
@@ -215,7 +225,7 @@ const storedWordsList = () =>{
     row.appendChild(tableTd(e.anotation))
     tbody.appendChild(row)
   })
-  allWords.reverse()
+  userInput.allWords.reverse()
 }
 
 //I dont't know why this function returns undefined when receiving hiragana

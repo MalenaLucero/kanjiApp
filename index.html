@@ -16,17 +16,18 @@
     </header>
     <nav class="mainNav">
         <ul>
-            <li><a href="#" onclick="addKanjiSection()">Add kanji</a></li>
+            <li><a href="#" onclick="addKanjiSection()">Add word</a></li>
             <li><a href="#" onclick="searchSection()">Search</a></li>
             <li><a href="#" onclick="jlptSection()">JLPT list</a></li>
             <li><a href="#" onclick="allSection()">All</a></li>
         </ul>
     </nav>
+    <!--ADD KANJI-->
     <section class="addKanjiSection show" id="addKanjiSection">
         <form class="newKanjiForm">
-            <label for="kanjiInput">New kanji:</label>
-            <input id="kanjiInput">
-            <div class="inputError" id="kanjiInputError"></div>
+            <label for="wordInput">New word:</label>
+            <input id="wordInput">
+            <div class="inputError" id="wordInputError"></div>
             <label for="readingInput">Reading:</label>
             <input id="readingInput">
             <label for="anotationInput">Anotation:</label>
