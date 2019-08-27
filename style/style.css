@@ -145,6 +145,13 @@ body .search a {
   display: block;
   text-align: center;
 }
+body .jlptSection {
+  background-color: #484c7f;
+  color: #ddb6c6;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 10px;
+}
 body .allSection {
   margin-top: 20px;
 }

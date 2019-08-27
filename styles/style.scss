@@ -163,6 +163,13 @@ body{
             text-align: center;
         }
     }
+    .jlptSection{
+        background-color: $dark-color;
+        color: $light-color;
+        max-width: 400px;
+        margin: 0 auto;
+        padding: $small-margin;
+    }
     .allSection{
         margin-top: $medium-margin;
         table{
