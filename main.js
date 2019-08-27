@@ -22,7 +22,7 @@ const confirm = () =>{
       userInput.allWords.push(newWord)
       setLocalStorage()
       showElement('mainRelatedKanji')
-      printRelatedWords(newWord, 'relatedKanjiContainer')
+      printRelatedWords(word, 'relatedKanjiContainer')
       kanjiArray.forEach( e =>{
         if(!alreadyExistingItem(e, allKanji.map(e=>e.kanji))){
           fetch('https://kanjiapi.dev/v1/kanji/' + e)
@@ -108,32 +108,6 @@ const wordsSharingKanji = (word, kanjiList) =>{
   return sameKanjiWords
 }
 
-//receives a string
-const wordsSharingOnyomi = (term) =>{
-  innerHTMLCleaner("wordsSharingOnyomiContainer")
-  let termObject = allWords.find(e=> {if(e.word===term) return e})
-  let same = false
-  termObject.kanjiList.forEach(kanji=>{
-    kanji.on_readings.forEach(on=>{
-      let sameOnyomi = []
-      sameOnyomi = allWords.filter(word=>{
-        same = false
-        word.kanjiList.forEach(innerKanji =>{
-          innerKanji.on_readings.forEach(innerOn =>{
-            if(innerOn === on) same = true
-          })
-        })
-        if(same) return word
-      })
-      sameOnyomi.splice(sameOnyomi.indexOf(sameOnyomi.find(e=>e.word === term)), 1)
-      if(sameOnyomi.length > 0){
-        printOnScreen('wordsSharingOnyomiContainer', `Words sharing 「${on}」 onyomi:`)
-        printList('wordsSharingOnyomiContainer', sameOnyomi.map(e=>e.word), sameOnyomi.map(e=>e.reading))
-      }
-    })
-  })
-}
-
 const printList = (containerId, array, secondArray) =>{
   let container = document.getElementById(containerId)
   let ul = document.createElement('ul')
@@ -158,7 +132,7 @@ const searchKanjiInfo = () =>{
   innerHTMLCleaner('isKanjiStored')
   if(input !== '') {
     printRelatedWords(input, 'searchInfoContainer')
-    alreadyExistingKanji(input) ? printOnScreen('isKanjiStored', 'This word is on your list') : printOnScreen('isKanjiStored', 'This word in not on your list')
+    alreadyExistingItem(input, userInput.allWords.map(e=>e.word)) ? printOnScreen('isKanjiStored', 'This word is on your list') : printOnScreen('isKanjiStored', 'This word in not on your list')
   }
 }
 
@@ -168,12 +142,12 @@ const innerHTMLCleaner = (containerId) =>{
 }
 
 const printRelatedWords = (newWord, containerId) =>{
-  let {word, kanjiList} = newWord
   innerHTMLCleaner(containerId)
-  printOnScreen(containerId, `Word: ${word}`)
-  let kanjiRelatedWords = wordsSharingKanji(word, kanjiList)
+  printOnScreen(containerId, `Word: ${newWord}`)
+  let kanjiArray = getKanjiArray(newWord)
+  let kanjiRelatedWords = wordsSharingKanji(newWord, kanjiArray)
   kanjiRelatedWords.forEach((words, index)=>{
-    printOnScreen(containerId, `Words sharing 「${kanjiList[index]}」 kanji:`)
+    printOnScreen(containerId, `Words sharing 「${kanjiArray[index]}」 kanji:`)
     if(words.length !== 0){
       printList(containerId, words.map(e=>e.word), words.map(e=>e.reading))
     }else{
@@ -252,31 +226,19 @@ const jlptStats = () =>{
   innerHTMLCleaner('jlpt2StoredKanji')
   innerHTMLCleaner('jlpt3StoredKanji')
   innerHTMLCleaner('jlpt4StoredKanji')
-  let allKanji = allStoredKanji()
-  printOnScreen('totalKanji', `Total kanji: ${allKanji.length}`)
-  let jlpt1Stored = allKanji.filter(kanji => {if(kanji.jlpt === 1) return kanji})
-  printList('jlpt1StoredKanji', jlpt1Stored.map(e=>e.kanji), jlpt1Stored.map(e=>e.meaning))
-  printOnScreen('jlpt1StoredKanji', `Total: ${jlpt1Stored.length}`)
-  let jlpt2Stored = allKanji.filter(kanji => {if(kanji.jlpt === 2) return kanji})
-  printList('jlpt2StoredKanji', jlpt2Stored.map(e=>e.kanji), jlpt2Stored.map(e=>e.meaning))
-  printOnScreen('jlpt2StoredKanji', `Total: ${jlpt2Stored.length}`)
-  let jlpt3Stored = allKanji.filter(kanji => {if(kanji.jlpt === 3) return kanji})
-  printList('jlpt3StoredKanji', jlpt3Stored.map(e=>e.kanji), jlpt3Stored.map(e=>e.meaning))
-  printOnScreen('jlpt3StoredKanji', `Total: ${jlpt3Stored.length}`)
-  let jlpt4Stored = allKanji.filter(kanji => {if(kanji.jlpt === 4) return kanji})
-  printList('jlpt4StoredKanji', jlpt4Stored.map(e=>e.kanji), jlpt4Stored.map(e=>e.meaning))
-  printOnScreen('jlpt4StoredKanji', `Total: ${jlpt4Stored.length}`)
+  printOnScreen('totalKanji', `Total kanji: ${userInput.allKanji.length}`)
+  printJLPTList('jlpt1StoredKanji', 1)
+  printJLPTList('jlpt2StoredKanji', 2)
+  printJLPTList('jlpt3StoredKanji', 3)
+  printJLPTList('jlpt4StoredKanji', 4)
 }
 
-const allStoredKanji = () =>{
-  let allKanji = []
-  allWords.forEach(word=>{
-    word.kanjiList.forEach(e=>{
-      if(allKanji.find(kanji=>kanji.kanji === e.kanji) === undefined) allKanji.push(e)
-    })
-  })
-  return allKanji
+const printJLPTList = (containerId, JLPTlevel) =>{
+  let jlptList = userInput.allKanji.filter(kanji => kanji.jlpt === JLPTlevel)
+  printList(containerId, jlptList.map(e=>e.kanji), jlptList.map(e=>e.meaning))
+  printOnScreen(containerId, `Total: ${jlptList.length}`)
 }
+
 
 
 
