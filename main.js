@@ -222,15 +222,12 @@ const hideElement = (elementId) =>{
 //JLPT functions
 const jlptStats = () =>{
   innerHTMLCleaner('totalKanji')
-  innerHTMLCleaner('jlpt1StoredKanji')
-  innerHTMLCleaner('jlpt2StoredKanji')
-  innerHTMLCleaner('jlpt3StoredKanji')
-  innerHTMLCleaner('jlpt4StoredKanji')
   printOnScreen('totalKanji', `Total kanji: ${userInput.allKanji.length}`)
-  printJLPTList('jlpt1StoredKanji', 1)
-  printJLPTList('jlpt2StoredKanji', 2)
-  printJLPTList('jlpt3StoredKanji', 3)
-  printJLPTList('jlpt4StoredKanji', 4)
+  const fourArray = [1, 2, 3, 4]
+  fourArray.forEach(e=>{
+    innerHTMLCleaner(`jlpt${e}StoredKanji`)
+    printJLPTList(`jlpt${e}StoredKanji`, e)
+  })
 }
 
 const printJLPTList = (containerId, JLPTlevel) =>{
