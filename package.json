@@ -1,0 +1,22 @@
+{
+  "name": "kanjiapp",
+  "version": "1.0.0",
+  "description": "Hello. I'm making this web application to make connections between the Japanese kanji I study everyday and I thought it might help other people. I've just started, so there's a long way to go.",
+  "main": "main.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MalenaLucero/kanjiApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MalenaLucero/kanjiApp/issues"
+  },
+  "homepage": "https://github.com/MalenaLucero/kanjiApp#readme",
+  "dependencies": {
+    "express": "4.17.1"
+  }
+}
