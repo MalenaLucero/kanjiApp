@@ -8,6 +8,7 @@ a {
   color: #f1d4d4;
   background-color: #484c7f;
   display: inline-block;
+  text-align: center;
 }
 
 body {
@@ -99,7 +100,12 @@ body .relatedKanji h3 {
 body .relatedKanji .isKanjiStored {
   background-color: #f1d4d4;
   margin-bottom: 0;
+  margin-top: 10px;
   text-align: center;
+}
+body .relatedKanji a {
+  width: 120px;
+  margin: 0 auto;
 }
 body .relatedKanji .kanjiCompared {
   background-color: #f1d4d4;

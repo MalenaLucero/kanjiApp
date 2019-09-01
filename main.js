@@ -127,12 +127,18 @@ const printOnScreen = (containerId, string) =>{
 }
 
 const searchKanjiInfo = () =>{
-  let input = inputValue('searchKanji')
+  const input = inputValue('searchKanji')
   showElement('secondaryRelatedKanji')
   innerHTMLCleaner('isKanjiStored')
   if(input !== '') {
     printRelatedWords(input, 'searchInfoContainer')
-    alreadyExistingItem(input, userInput.allWords.map(e=>e.word)) ? printOnScreen('isKanjiStored', 'This word is on your list') : printOnScreen('isKanjiStored', 'This word in not on your list')
+    if(alreadyExistingItem(input, userInput.allWords.map(e=>e.word))){
+      printOnScreen('isKanjiStored', 'This word is on your list')
+      hideElement('searchAddWord')
+    }else{
+      printOnScreen('isKanjiStored', 'This word in not on your list')
+      showElement('searchAddWord')
+    }
   }
 }
 
