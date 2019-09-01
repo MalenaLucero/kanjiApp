@@ -20,6 +20,12 @@ a{
     display: inline-block;
 }
 
+@mixin centering{
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+}
+
 @mixin form($backgroundColor, $borderColor){
     background-color: $backgroundColor;
     padding: 10px;
@@ -196,6 +202,12 @@ body{
                     background-color: $light-color;
                 }
             }
+        }
+        div.noStoredWords{
+            @include centering;
+            color: $dark-color;
+            text-align: center;
+            font-family: $English-font;
         }
     }
 }

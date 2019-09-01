@@ -180,6 +180,7 @@ const jlptSection = () =>{
 }
 
 const allSection = () =>{
+  userInput.allWords.length === 0 ? showElement('noStoredWords') : hideElement('noStoredWords')
   hideElement('addKanjiSection')
   hideElement('searchSection')
   hideElement('jlptSection')

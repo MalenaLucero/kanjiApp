@@ -178,6 +178,14 @@ body .allSection table tbody tr {
   border-bottom: 1px solid #f1d4d4;
   background-color: #ddb6c6;
 }
+body .allSection div.noStoredWords {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+  color: #484c7f;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+}
 
 .japanese {
   font-family: "Noto Sans JP", sans-serif;
