@@ -18,6 +18,7 @@ a{
     color: $background-color;
     background-color: $dark-color;
     display: inline-block;
+    font-family: $English-font;
 }
 
 @mixin form($backgroundColor, $borderColor){
@@ -38,6 +39,12 @@ a{
             border: 1px solid $borderColor;
         }
     }
+}
+
+@mixin centering{
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
 }
 
 body{
@@ -172,12 +179,11 @@ body{
     }
     .allSection{
         margin-top: $medium-margin;
-        table{
-            margin: 0 auto;
-            width: 100%;
-            max-width: 400px;
+        table.allTable{
+            @include centering;
             border-collapse: collapse;
             thead{
+                width: 400px;
                 background-color: $dark-color;
                 color: $background-color;
                 font-family: $English-font;
@@ -187,6 +193,7 @@ body{
                 }
             }
             tbody{
+                width: 400px;
                 td{
                 text-align: center;
                 padding: $small-margin 0;
@@ -196,6 +203,11 @@ body{
                     background-color: $light-color;
                 }
             }
+        }
+        div{
+            @include centering;
+            text-align: center;
+            color: $dark-color;
         }
     }
 }

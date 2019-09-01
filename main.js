@@ -180,6 +180,13 @@ const jlptSection = () =>{
 }
 
 const allSection = () =>{
+  if(userInput.allWords.length === 0){
+    hideElement('storedWordsTableHeader')
+    showElement('noStoredWords')
+  }else{
+    showElement('storedWordsTableHeader')
+    hideElement('noStoredWords')
+  }
   hideElement('addKanjiSection')
   hideElement('searchSection')
   hideElement('jlptSection')
