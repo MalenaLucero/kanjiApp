@@ -239,8 +239,19 @@ const jlptStats = () =>{
 
 const printJLPTList = (containerId, JLPTlevel) =>{
   let jlptList = userInput.allKanji.filter(kanji => kanji.jlpt === JLPTlevel)
-  printList(containerId, jlptList.map(e=>e.kanji), jlptList.map(e=>e.meaning))
   printOnScreen(containerId, `Total: ${jlptList.length}`)
+  printSimpleList(containerId, jlptList.map(e=>e.kanji))
+}
+
+printSimpleList = (containerId, array) =>{
+  let container = document.getElementById(containerId)
+  let ul = document.createElement('ul')
+  array.forEach(e=>{
+    let li = document.createElement('li')
+    li.innerText = e
+    ul.appendChild(li)
+  })
+  container.appendChild(ul)
 }
 
 
