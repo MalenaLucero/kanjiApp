@@ -157,6 +157,16 @@ body .jlptSection {
   max-width: 400px;
   margin: 0 auto;
   padding: 10px;
+  position: relative;
+}
+body .jlptSection .kanjiModal {
+  position: fixed;
+  height: 70vh;
+  width: 70%;
+  right: 10px;
+  bottom: 10px;
+  background-color: #ddb6c6;
+  color: #484c7f;
 }
 body .allSection {
   margin-top: 20px;

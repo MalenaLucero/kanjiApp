@@ -248,11 +248,24 @@ printSimpleList = (containerId, array) =>{
   let ul = document.createElement('ul')
   array.forEach(e=>{
     let li = document.createElement('li')
-    li.innerText = e
+    let anchor = document.createElement('a')
+    anchor.innerText = e
+    anchor.href = "#"
+    anchor.onclick = () => fillModal(e)
+    li.appendChild(anchor)
     ul.appendChild(li)
   })
   container.appendChild(ul)
 }
+
+const fillModal = kanji =>{
+  const title = document.getElementById('modalKanjiTitle')
+  title.innertext = kanji
+  console.log('hola')
+}
+
+
+
 
 
 

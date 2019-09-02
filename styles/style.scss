@@ -181,6 +181,16 @@ body{
         max-width: 400px;
         margin: 0 auto;
         padding: $small-margin;
+        position: relative;
+        .kanjiModal{
+            position: fixed;
+            height: 70vh;
+            width: 70%;
+            right: $small-margin;
+            bottom: $small-margin;
+            background-color: $light-color;
+            color: $dark-color;
+        }
     }
     .allSection{
         margin-top: $medium-margin;
