@@ -7,6 +7,7 @@ $medium-margin: 20px;
 $big-margin: 40px;
 $English-font: 'Montserrat', sans-serif;
 $Japanese-font: 'Noto Sans JP', sans-serif;
+$small-break: 400px;
 
 ul{
     list-style: none;
@@ -182,14 +183,48 @@ body{
         margin: 0 auto;
         padding: $small-margin;
         position: relative;
+        ul{
+            padding: 0;
+            li{
+                font-size: 20px;
+                padding: 0;
+                display: inline;
+                a{
+                    padding: 10px 10px;
+                }
+            }
+        }
         .kanjiModal{
+            padding: $small-margin;
             position: fixed;
-            height: 70vh;
-            width: 70%;
-            right: $small-margin;
-            bottom: $small-margin;
+            height: 100vh;
+            max-width: 400px;
+            top: 0;
+            left: 0;
             background-color: $light-color;
             color: $dark-color;
+            @media(min-width: 400px){
+                height: auto;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 350px;
+            }
+            a{
+                float: right;
+            }
+            h5{
+                clear: both;
+                text-align: center;
+                font-size: 60px;
+                margin: $medium-margin 0;
+            }
+            ul{
+                li{
+                    display: block;
+                    font-size: 16px;
+                }
+            }
         }
     }
     .allSection{

@@ -253,6 +253,7 @@ printSimpleList = (containerId, array) =>{
     anchor.href = "#"
     anchor.onclick = () => {
       event.preventDefault()
+      showElement('kanjiModal')
       fillModal(e)
     }
     li.appendChild(anchor)
@@ -295,6 +296,11 @@ const fromArrayToString = (array) =>{
     }
   })
   return string
+}
+
+const closeModal = () =>{
+  event.preventDefault()
+  hideElement('kanjiModal')
 }
 
 
