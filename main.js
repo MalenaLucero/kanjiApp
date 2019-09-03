@@ -251,7 +251,10 @@ printSimpleList = (containerId, array) =>{
     let anchor = document.createElement('a')
     anchor.innerText = e
     anchor.href = "#"
-    anchor.onclick = () => fillModal(e)
+    anchor.onclick = () => {
+      event.preventDefault()
+      fillModal(e)
+    }
     li.appendChild(anchor)
     ul.appendChild(li)
   })
@@ -260,8 +263,38 @@ printSimpleList = (containerId, array) =>{
 
 const fillModal = kanji =>{
   const title = document.getElementById('modalKanjiTitle')
-  title.innertext = kanji
-  console.log('hola')
+  title.innerText = kanji
+  let kanjiInfo = userInput.allKanji.find(e=>e.kanji === kanji)
+  innerHTMLCleaner('modalKanjiInfo')
+  createli('modalKanjiInfo', 'Kun readings', kanjiInfo.kun_readings)
+  createli('modalKanjiInfo', 'On readings', kanjiInfo.on_readings)
+  createli('modalKanjiInfo', 'Meaning', kanjiInfo.meaning)
+}
+
+const createli = (containerId, subtitle, content) =>{
+  const container = document.getElementById(containerId)
+  const li = document.createElement('li')
+  const firstSpan = document.createElement('span')
+  firstSpan.innerText = `${subtitle}: `
+  const secondSpan = document.createElement('span')
+  secondSpan.innerText = fromArrayToString(content)
+  li.appendChild(firstSpan)
+  li.appendChild(secondSpan)
+  container.appendChild(li)
+}
+
+const fromArrayToString = (array) =>{
+  let string = ''
+  array.forEach((e, index)=>{
+    if(index === 0 && index !== array.length-1){
+      string = `${e},`
+    }else if(index === array.length-1){
+      string = `${string} ${e}`
+    }else{
+      string = `${string} ${e}, `
+    }
+  })
+  return string
 }
 
 
