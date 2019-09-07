@@ -163,7 +163,7 @@ body .jlptSection ul {
   padding: 0;
 }
 body .jlptSection ul li {
-  font-size: 20px;
+  font-size: 18px;
   padding: 0;
   display: inline;
 }
@@ -171,10 +171,10 @@ body .jlptSection ul li a {
   padding: 10px 10px;
 }
 body .jlptSection .kanjiModal {
-  padding: 10px;
+  padding: 20px;
   position: fixed;
   height: 100vh;
-  max-width: 400px;
+  width: 100vw;
   top: 0;
   left: 0;
   background-color: #ddb6c6;
@@ -183,6 +183,7 @@ body .jlptSection .kanjiModal {
 @media (min-width: 400px) {
   body .jlptSection .kanjiModal {
     height: auto;
+    width: 350px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
