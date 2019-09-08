@@ -11,6 +11,13 @@ a {
   text-align: center;
 }
 
+.textAnchor {
+  color: #484c7f;
+  background-color: #f1d4d4;
+  padding: 0;
+  font-weight: bold;
+}
+
 body {
   background-color: #f1d4d4;
   box-sizing: border-box;
@@ -19,6 +26,35 @@ body {
 body header h1 {
   color: #484c7f;
   text-align: center;
+}
+body header .disclaimerModal {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background-color: #f1d4d4;
+  color: #484c7f;
+  text-align: justify;
+}
+@media (min-width: 400px) {
+  body header .disclaimerModal {
+    height: auto;
+    width: 350px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+body header .disclaimerModal a.closeWindow {
+  float: right;
+}
+body header .disclaimerModal p {
+  margin: 100px 20px;
+  clear: both;
+}
+body header .disclaimerModal p a {
+  display: inline;
 }
 body .mainNav ul {
   display: flex;
@@ -188,7 +224,7 @@ body .jlptSection .kanjiModal {
     transform: translate(-50%, -50%);
   }
 }
-body .jlptSection .kanjiModal a {
+body .jlptSection .kanjiModal a.closeWindow {
   float: right;
 }
 body .jlptSection .kanjiModal h5 {
@@ -237,6 +273,10 @@ body .allSection div.noStoredWords {
   color: #484c7f;
   text-align: center;
   font-family: "Montserrat", sans-serif;
+}
+body footer {
+  margin-top: 100px;
+  text-align: center;
 }
 
 .japanese {

@@ -22,10 +22,37 @@ a{
     text-align: center;
 }
 
+.textAnchor{
+    color: $dark-color;
+    background-color: $background-color;
+    padding: 0;
+    font-weight: bold;
+}
+
 @mixin centering{
     margin: 0 auto;
     width: 100%;
     max-width: 400px;
+}
+
+@mixin modal($background){
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    background-color: $background;
+    color: $dark-color;
+    @media(min-width: 400px){
+        height: auto;
+        width: 350px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    a.closeWindow{
+        float: right;
+    }
 }
 
 @mixin form($backgroundColor, $borderColor){
@@ -56,6 +83,17 @@ body{
         h1{
             color: $dark-color;
             text-align: center;
+        }
+        .disclaimerModal{
+            @include modal($background-color);
+            text-align: justify;
+            p{
+                margin: 100px $medium-margin;
+                clear: both;
+                a{
+                    display: inline;
+                }
+            }
         }
     }
     .mainNav{
@@ -195,23 +233,7 @@ body{
             }
         }
         .kanjiModal{
-            position: fixed;
-            height: 100vh;
-            width: 100vw;
-            top: 0;
-            left: 0;
-            background-color: $light-color;
-            color: $dark-color;
-            @media(min-width: 400px){
-                height: auto;
-                width: 350px;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-            a{
-                float: right;
-            }
+            @include modal($light-color);
             h5{
                 clear: both;
                 text-align: center;
@@ -260,6 +282,10 @@ body{
             text-align: center;
             font-family: $English-font;
         }
+    }
+    footer{
+        margin-top: 100px;
+        text-align: center;
     }
 }
 

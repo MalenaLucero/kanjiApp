@@ -297,7 +297,17 @@ const fromArrayToString = (array) =>{
   return string
 }
 
+const showDisclaimer = () =>{
+  event.preventDefault()
+  showElement('disclaimerModal')
+}
+
+const closeDisclaimerModal = () =>{
+  event.preventDefault()
+  hideElement('disclaimerModal')
+}
+
 const closeModal = () =>{
   event.preventDefault()
   hideElement('kanjiModal')
-}
+} 
