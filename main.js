@@ -18,7 +18,7 @@ const confirm = () =>{
     innerHTMLCleaner('wordInputError')
     if(word !== '' && !alreadyExistingItem(word, allWords.map(e=>e.word)) ){
       let kanjiArray = getKanjiArray(word)
-      let newWord = new storedWord(word, inputValue('readingInput'), inputValue('anotationInput'), kanjiArray)
+      let newWord = new storedWord(allWords.length, word, inputValue('readingInput'), inputValue('anotationInput'), kanjiArray)
       userInput.allWords.push(newWord)
       setLocalStorage()
       showElement('mainRelatedKanji')
@@ -27,8 +27,8 @@ const confirm = () =>{
         if(!alreadyExistingItem(e, allKanji.map(e=>e.kanji))){
           fetch('https://kanjiapi.dev/v1/kanji/' + e)
             .then(res=>res.json())
-            .then(res=>{
-              let newKanji = new storedKanji(res.kanji, res.jlpt, res.kun_readings, res.on_readings, res.meanings)
+            .then(res =>{
+              let newKanji = new storedKanji(res.kanji, res.grade, res.stroke_count, res.meanings, res.kun_readings, res.on_readings, res.jlpt, res.unicode)
               userInput.allKanji.push(newKanji)
               setLocalStorage()
             })
@@ -74,38 +74,24 @@ const getKanjiArray = (word) =>{
 }
 
 //object constructor
-function storedWord(word, reading, anotation, kanjiList){
+function storedWord(id, word, reading, anotation, kanjiList){
+  this.id = id
   this.word = word
   this.reading = reading
   this.anotation = anotation
-  this.kanjiList = kanjiList
+  this.kanjiList = kanjiList 
 }
 
 //internal kanji constructor
-function storedKanji(kanji, jlpt, kun_readings, on_readings, meaning){
+function storedKanji(kanji, grade, stroke_count, meanings, kun_readings, on_readings, jlpt, unicode){
   this.kanji = kanji
-  this.jlpt = jlpt
+  this.grade = grade
+  this.stroke_count = stroke_count
+  this.meanings = meanings
   this.kun_readings = kun_readings
   this.on_readings = on_readings
-  this.meaning = meaning
-}
-
-//receives a word and its list of kanji
-const wordsSharingKanji = (word, kanjiList) =>{
-  let same
-  let sameKanjiWords = []
-  kanjiList.forEach((kanji, index)=>{
-    sameKanjiWords[index] = userInput.allWords.filter(e=>{
-      if(e.word !== word){
-        same = false
-        e.kanjiList.forEach(intKanji=>{
-          if(kanji === intKanji) same = true
-        })
-        if(same) return e
-      }
-    })
-  })
-  return sameKanjiWords
+  this.jlpt = jlpt
+  this.unicode = unicode
 }
 
 const printList = (containerId, array, secondArray) =>{
@@ -150,16 +136,26 @@ const innerHTMLCleaner = (containerId) =>{
 const printRelatedWords = (newWord, containerId) =>{
   innerHTMLCleaner(containerId)
   printOnScreen(containerId, `Word: ${newWord}`)
-  let kanjiArray = getKanjiArray(newWord)
-  let kanjiRelatedWords = wordsSharingKanji(newWord, kanjiArray)
-  kanjiRelatedWords.forEach((words, index)=>{
-    printOnScreen(containerId, `Words sharing 「${kanjiArray[index]}」 kanji:`)
-    if(words.length !== 0){
-      printList(containerId, words.map(e=>e.word), words.map(e=>e.reading))
-    }else{
-      printOnScreen(containerId, 'No words share this kanji')
-    }
+  getKanjiArray(newWord).forEach(kanji=>{
+    printOnScreen(containerId, `Words sharing 「${kanji}」 kanji:`)
+      let listOfWords = wordsWithThisKanji(kanji).filter(e=>e.word !== newWord)
+      if(listOfWords.length !== 0){
+        printList(containerId, listOfWords.map(e=>e.word), listOfWords.map(e=>e.reading))
+      }else{
+        printOnScreen(containerId, 'No words share this kanji')
+      }
   })
+}
+
+const wordsWithThisKanji = (kanji) =>{
+  let listOfWords = userInput.allWords.filter(word=>{
+    let sameKanji = false
+    word.kanjiList.forEach(internalKanji => {
+      if(internalKanji === kanji) sameKanji = true
+    })
+    if(sameKanji) return word
+  })
+  return listOfWords
 }
 
 //main nav functions
@@ -192,6 +188,7 @@ const allSection = () =>{
   hideElement('jlptSection')
   showElement('allSection')
   storedWordsList()
+  console.log(wordsWithThisKanji('感'))
 }
 
 const storedWordsList = () =>{
@@ -269,7 +266,9 @@ const fillModal = kanji =>{
   innerHTMLCleaner('modalKanjiInfo')
   createli('modalKanjiInfo', 'Kun readings', kanjiInfo.kun_readings)
   createli('modalKanjiInfo', 'On readings', kanjiInfo.on_readings)
-  createli('modalKanjiInfo', 'Meaning', kanjiInfo.meaning)
+  createli('modalKanjiInfo', 'Meanings', kanjiInfo.meanings)
+  createli('modalKanjiInfo', 'Stroke count', kanjiInfo.stroke_count)
+  createli('modalKanjiInfo', 'Words with this kanji', wordsWithThisKanji(kanjiInfo.kanji).map(e=>e.word))
 }
 
 const createli = (containerId, subtitle, content) =>{
@@ -278,7 +277,7 @@ const createli = (containerId, subtitle, content) =>{
   const firstSpan = document.createElement('span')
   firstSpan.innerText = `${subtitle}: `
   const secondSpan = document.createElement('span')
-  secondSpan.innerText = fromArrayToString(content)
+  secondSpan.innerText = Array.isArray(content) ? fromArrayToString(content) : content
   li.appendChild(firstSpan)
   li.appendChild(secondSpan)
   container.appendChild(li)
