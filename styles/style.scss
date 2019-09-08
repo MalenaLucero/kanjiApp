@@ -87,6 +87,7 @@ body{
         .disclaimerModal{
             @include modal($background-color);
             text-align: justify;
+            z-index: 999;
             p{
                 margin: 100px $medium-margin;
                 clear: both;
