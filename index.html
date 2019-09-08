@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kanji Connect</title>
     <script src="main.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="style/style.css"></link>
+    <link rel="stylesheet" type="text/css" href="styles/style.css"></link>
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap" rel="stylesheet">
 </head>
@@ -24,7 +24,7 @@
         <ul>
             <li><a href="#" onclick="addKanjiSection()">Add word</a></li>
             <li><a href="#" onclick="searchSection()">Search</a></li>
-            <li><a href="#" onclick="jlptSection()">JLPT list</a></li>
+            <li><a href="#" onclick="jlptSection()">Stats</a></li>
             <li><a href="#" onclick="allSection()">All</a></li>
         </ul>
     </nav>
@@ -38,52 +38,62 @@
             <input id="readingInput">
             <label for="anotationInput">Anotation:</label>
             <textarea id="anotationInput" class="anotation"></textarea>
-            <a href="#" onclick="confirm()">Add new kanji</a>
+            <a href="#" onclick="confirm()">Add new word</a>
         </form>
         <div class="relatedKanji hide" id="mainRelatedKanji">
-            <h3>Related Kanji</h3>
+            <h3>Related Words</h3>
             <div class="japanese" id="relatedKanjiContainer"></div>
         </div>
     </section>
     <!--SEARCH-->
     <section class="searchSection hide" id="searchSection">
         <form class="search" id="search">
-            <label for="searchKanji">Search kanji:</label>
+            <label for="searchKanji">Search word:</label>
             <input id="searchKanji">
-            <a href="#" onclick="searchKanjiInfo()">Show kanji info</a>
+            <a href="#" onclick="searchKanjiInfo()">Show word info</a>
         </form>
         <div class="relatedKanji hide" id="secondaryRelatedKanji">
             <div class="isKanjiStored" id="isKanjiStored"></div>
             <a href="#" class="show" id="searchAddWord" onclick="addKanjiSection()">Add word</a>
-            <h3>Related Kanji</h3>
+            <h3>Related words</h3>
             <div class="japanese" id="searchInfoContainer"></div>
         </div>
     </section>
-    <!--JLPT-->
+    <!--STATS-->
     <section class="jlptSection hide japanese" id="jlptSection">
+        <nav class="innerNav">
+            <a href="#">By JLPT level</a>
+            <a href="#">By grade</a>
+        </nav>
         <div id="totalKanji"></div>
+        <!--KANJI MODAL-->
         <div id="kanjiModal" class="kanjiModal hide">
             <a href="#" onclick="closeModal()" class="closeWindow">x</a>
             <h5 id="modalKanjiTitle"></h5>
             <ul id="modalKanjiInfo"></ul>
         </div>
-        <div>
-            <h4>JLPT 1</h4>
-            <div id="jlpt1StoredKanji">
+        <!--SORT BY JLPT LEVEL-->
+        <div id="sortByJlpt">
+            <div>
+                <h4>JLPT 1</h4>
+                <div id="jlpt1StoredKanji">
+                </div>
+            </div>
+            <div>
+                <h4>JLPT 2</h4>
+                <div id="jlpt2StoredKanji"></div>
+            </div>
+            <div>
+                <h4>JLPT 3</h4>
+                <div id="jlpt3StoredKanji"></div>
+            </div>
+            <div>
+                <h4>JLPT 4</h4>
+                <div id="jlpt4StoredKanji"></div>
             </div>
         </div>
-        <div>
-            <h4>JLPT 2</h4>
-            <div id="jlpt2StoredKanji"></div>
-        </div>
-        <div>
-            <h4>JLPT 3</h4>
-            <div id="jlpt3StoredKanji"></div>
-        </div>
-        <div>
-            <h4>JLPT 4</h4>
-            <div id="jlpt4StoredKanji"></div>
-        </div>
+        <!--SORT BY GRADE-->
+
     </section>
     <!--ALL-->
     <section class="allSection japanese hide" id="allSection">
