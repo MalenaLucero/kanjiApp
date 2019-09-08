@@ -62,8 +62,8 @@
     <!--STATS-->
     <section class="jlptSection hide japanese" id="jlptSection">
         <nav class="innerNav">
-            <a href="#">By JLPT level</a>
-            <a href="#">By grade</a>
+            <a href="#" onclick="showSortByJlpt()">By JLPT level</a>
+            <a href="#" onclick="showSortByGrade()">By grade</a>
         </nav>
         <div id="totalKanji"></div>
         <!--KANJI MODAL-->
@@ -73,7 +73,7 @@
             <ul id="modalKanjiInfo"></ul>
         </div>
         <!--SORT BY JLPT LEVEL-->
-        <div id="sortByJlpt">
+        <div class="show" id="sortByJlpt">
             <div>
                 <h4>JLPT 1</h4>
                 <div id="jlpt1StoredKanji">
@@ -93,7 +93,36 @@
             </div>
         </div>
         <!--SORT BY GRADE-->
-
+        <div class="hide" id="sortByGrade">
+            <div>
+                <h4>Grade 8</h4>
+                <div id="grade8StoredKanji"></div>
+            </div>
+            <div>
+                <h4>Grade 6</h4>
+                <div id="grade6StoredKanji"></div>
+            </div>
+            <div>
+                <h4>Grade 5</h4>
+                <div id="grade5StoredKanji"></div>
+            </div>
+            <div>
+                <h4>Grade 4</h4>
+                <div id="grade4StoredKanji"></div>
+            </div>
+            <div>
+                <h4>Grade 3</h4>
+                <div id="grade3StoredKanji"></div>
+            </div>
+            <div>
+                <h4>Grade 2</h4>
+                <div id="grade2StoredKanji"></div>
+            </div>
+            <div>
+                <h4>Grade 1</h4>
+                <div id="grade1StoredKanji"></div>
+            </div>
+        </div>
     </section>
     <!--ALL-->
     <section class="allSection japanese hide" id="allSection">

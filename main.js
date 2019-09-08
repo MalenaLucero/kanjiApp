@@ -234,6 +234,21 @@ const jlptStats = () =>{
   })
 }
 
+//GRADE functions
+const stats = (option) =>{
+  let numbersArray = option === 'jlpt' ? [1, 2, 3, 4] : [1, 2, 3, 4, 5, 6, 8]
+  numbersArray.forEach(e=>{
+    innerHTMLCleaner(`${option}${e}StoredKanji`)
+    printKanjiList(`${option}${e}StoredKanji`, e, option)
+  })
+}
+
+const printKanjiList = (containerId, level, option) =>{
+  let kanjiList = option === 'jlpt' ? userInput.allKanji.filter(e => e.jlpt === level) : userInput.allKanji.filter(e => e.grade === level)
+  printOnScreen(containerId, `Total: ${kanjiList.length}`)
+  printSimpleList(containerId, kanjiList.map(e=>e.kanji))
+}
+
 const printJLPTList = (containerId, JLPTlevel) =>{
   let jlptList = userInput.allKanji.filter(kanji => kanji.jlpt === JLPTlevel)
   printOnScreen(containerId, `Total: ${jlptList.length}`)
@@ -311,3 +326,14 @@ const closeModal = () =>{
   event.preventDefault()
   hideElement('kanjiModal')
 } 
+
+const showSortByJlpt = () =>{
+  hideElement('sortByGrade')
+  showElement('sortByJlpt')
+}
+
+const showSortByGrade = () =>{
+  hideElement('sortByJlpt')
+  showElement('sortByGrade')
+  stats('grade')
+}
