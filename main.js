@@ -162,33 +162,32 @@ const wordsWithThisKanji = (kanji) =>{
 const addKanjiSection = () =>{
   showElement('addKanjiSection')
   hideElement('searchSection')
-  hideElement('jlptSection')
+  hideElement('statsSection')
   hideElement('allSection')
 }
 
 const searchSection = () =>{
   hideElement('addKanjiSection')
   showElement('searchSection')
-  hideElement('jlptSection')
+  hideElement('statsSection')
   hideElement('allSection')
 }
 
 const jlptSection = () =>{
   hideElement('addKanjiSection')
   hideElement('searchSection')
-  showElement('jlptSection')
+  showElement('statsSection')
   hideElement('allSection')
-  jlptStats()
+  kanjiStats()
 }
 
 const allSection = () =>{
   userInput.allWords.length === 0 ? showElement('noStoredWords') : hideElement('noStoredWords')
   hideElement('addKanjiSection')
   hideElement('searchSection')
-  hideElement('jlptSection')
+  hideElement('statsSection')
   showElement('allSection')
   storedWordsList()
-  console.log(wordsWithThisKanji('感'))
 }
 
 const storedWordsList = () =>{
@@ -223,18 +222,16 @@ const hideElement = (elementId) =>{
   element.classList.replace('show', 'hide')
 }
 
-//JLPT functions
-const jlptStats = () =>{
+//jlpt and grade functions
+const kanjiStats = () =>{
   innerHTMLCleaner('totalKanji')
   printOnScreen('totalKanji', `Total kanji: ${userInput.allKanji.length}`)
-  const fourArray = [1, 2, 3, 4]
-  fourArray.forEach(e=>{
-    innerHTMLCleaner(`jlpt${e}StoredKanji`)
-    printJLPTList(`jlpt${e}StoredKanji`, e)
-  })
+  stats('jlpt')
+  stats('grade')
 }
 
 //GRADE functions
+//option stands for "jlpt" or "grade"
 const stats = (option) =>{
   let numbersArray = option === 'jlpt' ? [1, 2, 3, 4] : [1, 2, 3, 4, 5, 6, 8]
   numbersArray.forEach(e=>{
@@ -247,12 +244,6 @@ const printKanjiList = (containerId, level, option) =>{
   let kanjiList = option === 'jlpt' ? userInput.allKanji.filter(e => e.jlpt === level) : userInput.allKanji.filter(e => e.grade === level)
   printOnScreen(containerId, `Total: ${kanjiList.length}`)
   printSimpleList(containerId, kanjiList.map(e=>e.kanji))
-}
-
-const printJLPTList = (containerId, JLPTlevel) =>{
-  let jlptList = userInput.allKanji.filter(kanji => kanji.jlpt === JLPTlevel)
-  printOnScreen(containerId, `Total: ${jlptList.length}`)
-  printSimpleList(containerId, jlptList.map(e=>e.kanji))
 }
 
 printSimpleList = (containerId, array) =>{
@@ -328,12 +319,14 @@ const closeModal = () =>{
 } 
 
 const showSortByJlpt = () =>{
+  event.preventDefault()
   hideElement('sortByGrade')
   showElement('sortByJlpt')
 }
 
 const showSortByGrade = () =>{
+  event.preventDefault()
   hideElement('sortByJlpt')
   showElement('sortByGrade')
-  stats('grade')
+  
 }
