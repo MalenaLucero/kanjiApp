@@ -29,6 +29,12 @@ a{
     font-weight: bold;
 }
 
+.internalAnchor{
+    background-color: $light-color;
+    color: $dark-color;
+    border-radius: 10px;
+}
+
 @mixin centering{
     margin: 0 auto;
     width: 100%;
@@ -222,6 +228,11 @@ body{
         margin: 0 auto;
         padding: $small-margin;
         position: relative;
+        .innerNav{
+            display: flex;
+            justify-content: space-between;
+            padding: $small-margin;
+        }
         ul{
             padding: 0;
             li{

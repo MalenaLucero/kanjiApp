@@ -18,6 +18,12 @@ a {
   font-weight: bold;
 }
 
+.internalAnchor {
+  background-color: #ddb6c6;
+  color: #484c7f;
+  border-radius: 10px;
+}
+
 body {
   background-color: #f1d4d4;
   box-sizing: border-box;
@@ -195,6 +201,11 @@ body .jlptSection {
   margin: 0 auto;
   padding: 10px;
   position: relative;
+}
+body .jlptSection .innerNav {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
 }
 body .jlptSection ul {
   padding: 0;
