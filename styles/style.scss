@@ -29,10 +29,18 @@ a{
     font-weight: bold;
 }
 
-.internalAnchor{
+.internalAnchorPressed{
     background-color: $light-color;
     color: $dark-color;
     border-radius: 10px;
+    border: 2px solid $light-color;
+}
+
+.internalAnchorNotPressed{
+    background-color: $dark-color;
+    color: $light-color;
+    border-radius: 10px;
+    border: 2px solid $light-color;
 }
 
 @mixin centering{

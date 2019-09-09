@@ -18,10 +18,18 @@ a {
   font-weight: bold;
 }
 
-.internalAnchor {
+.internalAnchorPressed {
   background-color: #ddb6c6;
   color: #484c7f;
   border-radius: 10px;
+  border: 2px solid #ddb6c6;
+}
+
+.internalAnchorNotPressed {
+  background-color: #484c7f;
+  color: #ddb6c6;
+  border-radius: 10px;
+  border: 2px solid #ddb6c6;
 }
 
 body {

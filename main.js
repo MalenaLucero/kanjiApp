@@ -322,11 +322,19 @@ const showSortByJlpt = () =>{
   event.preventDefault()
   hideElement('sortByGrade')
   showElement('sortByJlpt')
+  replaceStyle('byJlptLevelAnchor', 'internalAnchorNotPressed', 'internalAnchorPressed')
+  replaceStyle('byGradeAnchor', 'internalAnchorPressed', 'internalAnchorNotPressed')
 }
 
 const showSortByGrade = () =>{
   event.preventDefault()
   hideElement('sortByJlpt')
   showElement('sortByGrade')
-  
+  replaceStyle('byGradeAnchor', 'internalAnchorNotPressed', 'internalAnchorPressed')
+  replaceStyle('byJlptLevelAnchor', 'internalAnchorPressed', 'internalAnchorNotPressed')
+}
+
+const replaceStyle = (elementId, oldStyle, newStyle) =>{
+  const element = document.getElementById(elementId)
+  element.classList.replace(oldStyle, newStyle)
 }

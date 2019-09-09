@@ -26,7 +26,7 @@
         <ul>
             <li><a href="#" onclick="addKanjiSection()">Add word</a></li>
             <li><a href="#" onclick="searchSection()">Search</a></li>
-            <li><a href="#" onclick="jlptSection()">Stats</a></li>
+            <li><a href="#" onclick="jlptSection()">Sort</a></li>
             <li><a href="#" onclick="allSection()">All</a></li>
         </ul>
     </nav>
@@ -64,8 +64,8 @@
     <!--STATS-->
     <section class="jlptSection hide japanese" id="statsSection">
         <nav class="innerNav">
-            <a href="#" onclick="showSortByJlpt()" class="internalAnchor">By JLPT level</a>
-            <a href="#" onclick="showSortByGrade()" class="internalAnchor">By grade</a>
+            <a href="#" onclick="showSortByJlpt()" class="internalAnchorPressed" id="byJlptLevelAnchor">By JLPT level</a>
+            <a href="#" onclick="showSortByGrade()" class="internalAnchorNotPressed" id="byGradeAnchor">By grade</a>
         </nav>
         <div id="totalKanji"></div>
         <!--KANJI MODAL-->
