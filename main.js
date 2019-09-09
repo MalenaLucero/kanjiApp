@@ -59,7 +59,7 @@ const inputValue = (inputId) =>{
   return value
 }
 
-//from a full kanji and kana word or phrase, it extracts only the kanji
+//from a full kanji and kana word or phrase, it returns only the kanji
 const getKanjiArray = (word) =>{
   let kanjiArray = []
   //iteration of a string
@@ -233,7 +233,7 @@ const kanjiStats = () =>{
 //GRADE functions
 //option stands for "jlpt" or "grade"
 const stats = (option) =>{
-  let numbersArray = option === 'jlpt' ? [1, 2, 3, 4] : [1, 2, 3, 4, 5, 6, 8]
+  let numbersArray = option === 'jlpt' ? [1, 2, 3, 4] : [1, 2, 3, 4, 5, 6, 7, 8]
   numbersArray.forEach(e=>{
     innerHTMLCleaner(`${option}${e}StoredKanji`)
     printKanjiList(`${option}${e}StoredKanji`, e, option)

@@ -221,13 +221,22 @@ body .jlptSection {
 body .jlptSection .innerNav {
   display: flex;
   justify-content: space-around;
-  padding: 10px;
+  padding: 10px 0 20px;
+}
+body .jlptSection h4 {
+  margin: 10px 0 0;
+}
+body .jlptSection p {
+  margin: 0;
+}
+body .jlptSection .totalKanji {
+  text-align: center;
 }
 body .jlptSection ul {
   padding: 0;
 }
 body .jlptSection ul li {
-  font-size: 18px;
+  font-size: 20px;
   padding: 0;
   display: inline;
 }

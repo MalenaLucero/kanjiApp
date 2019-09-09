@@ -251,12 +251,21 @@ body{
         .innerNav{
             display: flex;
             justify-content: space-around;
-            padding: $small-margin;
+            padding: $small-margin 0 $medium-margin;
+        }
+        h4{
+            margin: $small-margin 0 0;
+        }
+        p{
+            margin: 0;
+        }
+        .totalKanji{
+            text-align: center;
         }
         ul{
             padding: 0;
             li{
-                font-size: 18px;
+                font-size: 20px;
                 padding: 0;
                 display: inline;
                 a{

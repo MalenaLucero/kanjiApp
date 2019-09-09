@@ -61,13 +61,13 @@
             <div class="japanese" id="searchInfoContainer"></div>
         </div>
     </section>
-    <!--STATS-->
+    <!--SORT-->
     <section class="jlptSection hide japanese" id="statsSection">
         <nav class="innerNav">
             <a href="#" onclick="showSortByJlpt()" class="internalAnchorPressed" id="byJlptLevelAnchor">By JLPT level</a>
             <a href="#" onclick="showSortByGrade()" class="internalAnchorNotPressed" id="byGradeAnchor">By grade</a>
         </nav>
-        <div id="totalKanji"></div>
+        <div class="totalKanji" id="totalKanji"></div>
         <!--KANJI MODAL-->
         <div id="kanjiModal" class="kanjiModal hide">
             <div>
@@ -101,6 +101,10 @@
             <div>
                 <h4>Grade 8</h4>
                 <div id="grade8StoredKanji"></div>
+            </div>
+            <div>
+                <h4>Grade 7</h4>
+                <div id="grade7StoredKanji"></div>
             </div>
             <div>
                 <h4>Grade 6</h4>
