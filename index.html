@@ -14,10 +14,8 @@
     <header>
         <a href="#" onclick="showDisclaimer()" class="textAnchor">About</a>
         <div class="disclaimerModal hide" id="disclaimerModal">
-            <div>
-                <a href="#" onclick="closeDisclaimerModal()" class="closeWindow">x</a>
-                <p>This kanji app is a work in progress and I'm not making money with it. It feeds off the public API <a href="https://kanjiapi.dev/" class="textAnchor">kanjiapi.dev</a>, which in turn uses the EDICT and KANJIDIC dictionary files property of the <a href="http://www.edrdg.org/" class="textAnchor">Electronic Dictionary Research and Development Group</a>.</p>
-            </div>
+            <a href="#" onclick="closeDisclaimerModal()" class="closeWindow">x</a>
+            <p>This kanji app is a work in progress and I'm not making money with it. It feeds off the public API <a href="https://kanjiapi.dev/" class="textAnchor">kanjiapi.dev</a>, which in turn uses the EDICT and KANJIDIC dictionary files property of the <a href="http://www.edrdg.org/" class="textAnchor">Electronic Dictionary Research and Development Group</a>.</p>
         </div>
         <h1>Kanji Connect</h1>
     </header>
@@ -70,11 +68,9 @@
         <div class="totalKanji" id="totalKanji"></div>
         <!--KANJI MODAL-->
         <div id="kanjiModal" class="kanjiModal hide">
-            <div>
-                <a href="#" onclick="closeModal()" class="closeWindow">x</a>
-                <h5 id="modalKanjiTitle"></h5>
-                <ul id="modalKanjiInfo"></ul>
-            </div>
+            <a href="#" onclick="closeModal()" class="closeWindow">x</a>
+            <h5 id="modalKanjiTitle"></h5>
+            <ul id="modalKanjiInfo"></ul>
         </div>
         <!--SORT BY JLPT LEVEL-->
         <div class="show" id="sortByJlpt">

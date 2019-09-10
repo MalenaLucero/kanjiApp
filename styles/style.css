@@ -42,15 +42,6 @@ body header h1 {
   text-align: center;
 }
 body header .disclaimerModal {
-  height: 100vh;
-  width: 100vw;
-  background-color: #ddb6c6;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 999;
-}
-body header .disclaimerModal div {
   position: fixed;
   height: 100vh;
   width: 100vw;
@@ -59,24 +50,25 @@ body header .disclaimerModal div {
   background-color: #f1d4d4;
   color: #484c7f;
   text-align: justify;
+  z-index: 999;
+  border: 2px solid #484c7f;
 }
-@media (min-width: 400px) {
-  body header .disclaimerModal div {
+@media (min-width: 800px) {
+  body header .disclaimerModal {
     height: auto;
-    width: 350px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 28%;
+    bottom: 0;
+    left: 0;
   }
 }
-body header .disclaimerModal div a.closeWindow {
+body header .disclaimerModal a.closeWindow {
   float: right;
 }
-body header .disclaimerModal div p {
+body header .disclaimerModal p {
   margin: 100px 20px;
   clear: both;
 }
-body header .disclaimerModal div p a {
+body header .disclaimerModal p a {
   display: inline;
 }
 body .mainNav ul {
@@ -244,14 +236,6 @@ body .jlptSection ul li a {
   padding: 10px 10px;
 }
 body .jlptSection .kanjiModal {
-  height: 100vh;
-  width: 100vw;
-  background-color: #f1d4d4;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-body .jlptSection .kanjiModal div {
   position: fixed;
   height: 100vh;
   width: 100vw;
@@ -260,28 +244,27 @@ body .jlptSection .kanjiModal div {
   background-color: #ddb6c6;
   color: #484c7f;
 }
-@media (min-width: 400px) {
-  body .jlptSection .kanjiModal div {
+@media (min-width: 800px) {
+  body .jlptSection .kanjiModal {
     height: auto;
-    width: 350px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 28%;
+    bottom: 0;
+    left: 0;
   }
 }
-body .jlptSection .kanjiModal div a.closeWindow {
+body .jlptSection .kanjiModal a.closeWindow {
   float: right;
 }
-body .jlptSection .kanjiModal div h5 {
+body .jlptSection .kanjiModal h5 {
   clear: both;
   text-align: center;
   font-size: 60px;
   margin: 20px 0;
 }
-body .jlptSection .kanjiModal div ul {
+body .jlptSection .kanjiModal ul {
   padding: 20px;
 }
-body .jlptSection .kanjiModal div ul li {
+body .jlptSection .kanjiModal ul li {
   display: block;
   font-size: 16px;
 }

@@ -57,25 +57,15 @@ a{
     left: 0;
     background-color: $background;
     color: $dark-color;
-    @media(min-width: 400px){
+    @media(min-width: 800px){
         height: auto;
-        width: 350px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        width: 28%;
+        bottom: 0;
+        left: 0;
     }
     a.closeWindow{
         float: right;
     }
-}
-
-@mixin modalBackDiv($background){
-    height: 100vh;
-    width: 100vw;
-    background-color: $background;
-    position: fixed;
-    top: 0;
-    left: 0;
 }
 
 @mixin form($backgroundColor, $borderColor){
@@ -108,17 +98,15 @@ body{
             text-align: center;
         }
         .disclaimerModal{
-            @include modalBackDiv($light-color);
+            @include modal($background-color);
+            text-align: justify;
             z-index: 999;
-            div{
-                @include modal($background-color);
-                text-align: justify;
-                p{
-                    margin: 100px $medium-margin;
-                    clear: both;
-                    a{
-                        display: inline;
-                    }
+            border: 2px solid $dark-color;
+            p{
+                margin: 100px $medium-margin;
+                clear: both;
+                a{
+                    display: inline;
                 }
             }
         }
@@ -274,21 +262,18 @@ body{
             }
         }
         .kanjiModal{
-            @include modalBackDiv($background-color);
-            div{
-                @include modal($light-color);
-                h5{
-                    clear: both;
-                    text-align: center;
-                    font-size: 60px;
-                    margin: $medium-margin 0;
-                }
-                ul{
-                    padding: $medium-margin;
-                    li{
-                        display: block;
-                        font-size: 16px;
-                    }
+            @include modal($light-color);
+            h5{
+                clear: both;
+                text-align: center;
+                font-size: 60px;
+                margin: $medium-margin 0;
+            }
+            ul{
+                padding: $medium-margin;
+                li{
+                    display: block;
+                    font-size: 16px;
                 }
             }
         }
