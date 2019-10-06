@@ -88,6 +88,14 @@ a{
     }
 }
 
+@mixin seeMoreBtn($letterColor, $backgroundColor){
+    cursor: pointer;
+    color: $letterColor;
+    background-color: $backgroundColor;
+    padding: 10px;
+    border-radius: 10px;
+}
+
 body{
     background-color: $background-color;
     box-sizing: border-box;

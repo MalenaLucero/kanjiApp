@@ -1,0 +1,329 @@
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  padding: 10px 20px;
+  color: #f1d4d4;
+  background-color: #484c7f;
+  display: inline-block;
+  text-align: center;
+}
+
+.textAnchor {
+  color: #484c7f;
+  background-color: #f1d4d4;
+  padding: 0;
+  font-weight: bold;
+}
+
+.internalAnchorPressed {
+  background-color: #ddb6c6;
+  color: #484c7f;
+  border-radius: 10px;
+  border: 2px solid #ddb6c6;
+}
+
+.internalAnchorNotPressed {
+  background-color: #484c7f;
+  color: #ddb6c6;
+  border-radius: 10px;
+  border: 2px solid #ddb6c6;
+}
+
+body {
+  background-color: #f1d4d4;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+body header h1 {
+  color: #484c7f;
+  text-align: center;
+}
+body header .disclaimerModal {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background-color: #f1d4d4;
+  color: #484c7f;
+  text-align: justify;
+  z-index: 999;
+  border: 2px solid #484c7f;
+}
+@media (min-width: 800px) {
+  body header .disclaimerModal {
+    height: auto;
+    width: 28%;
+    bottom: 0;
+    left: 0;
+  }
+}
+body header .disclaimerModal a.closeWindow {
+  float: right;
+}
+body header .disclaimerModal p {
+  margin: 100px 20px;
+  clear: both;
+}
+body header .disclaimerModal p a {
+  display: inline;
+}
+body .mainNav ul {
+  display: flex;
+  padding: 0;
+  max-width: 400px;
+  margin: 0 auto;
+}
+body .mainNav ul li {
+  border-top-right-radius: 15px;
+}
+body .mainNav ul li:nth-of-type(1) {
+  background-color: #ddb6c6;
+  color: #484c7f;
+}
+body .mainNav ul li:nth-of-type(2) {
+  background-color: #ac8daf;
+  color: #484c7f;
+}
+body .mainNav ul li:nth-of-type(3) {
+  background-color: #484c7f;
+  color: #f1d4d4;
+}
+body .mainNav ul li:nth-of-type(4) {
+  color: #484c7f;
+  font-weight: bold;
+}
+body .mainNav ul li a {
+  background-color: inherit;
+  color: inherit;
+  border-radius: inherit;
+}
+body .newKanjiForm {
+  padding: 10px;
+  background-color: #ddb6c6;
+  max-width: 400px;
+  margin: 0 auto;
+}
+body .newKanjiForm a {
+  display: block;
+  text-align: center;
+}
+body label {
+  display: block;
+  margin-bottom: 10px;
+}
+body input {
+  width: 100%;
+  border: none;
+  margin-bottom: 10px;
+  height: 25px;
+  border: 1px solid white;
+  font-family: "Noto Sans JP", sans-serif;
+}
+body input:focus {
+  outline: none !important;
+  border: 1px solid #484c7f;
+}
+body textarea {
+  width: 100%;
+  height: 50px;
+  border: 1px solid white;
+  padding: 0;
+  margin-bottom: 10px;
+}
+body textarea:focus {
+  outline: none !important;
+  border: 1px solid #484c7f;
+}
+body .relatedKanji {
+  margin-top: 40px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+body .relatedKanji h3 {
+  text-align: center;
+  color: #484c7f;
+  margin-bottom: 10px;
+}
+body .relatedKanji .isKanjiStored {
+  background-color: #f1d4d4;
+  margin-bottom: 0;
+  margin-top: 10px;
+  text-align: center;
+}
+body .relatedKanji a {
+  width: 120px;
+  margin: 0 auto;
+}
+body .relatedKanji .kanjiCompared {
+  background-color: #f1d4d4;
+  text-align: center;
+  margin: 0 0 10px;
+  padding: 0;
+}
+body .relatedKanji div {
+  background-color: #ddb6c6;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+body .relatedKanji div p {
+  color: #484c7f;
+  margin: 0 0 10px;
+}
+body .relatedKanji div ul {
+  margin: 0 0 20px;
+}
+body .relatedKanji div ul:last-of-type {
+  margin-bottom: 0;
+}
+body .search {
+  background-color: #ac8daf;
+  padding: 10px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+body .search label {
+  display: block;
+  margin-bottom: 10px;
+}
+body .search input {
+  width: 100%;
+  margin-bottom: 10px;
+  height: 25px;
+  border: 1px solid white;
+}
+body .search input:focus {
+  border: 1px solid #484c7f;
+}
+body .search a {
+  display: block;
+  text-align: center;
+}
+body .jlptSection {
+  background-color: #484c7f;
+  color: #ddb6c6;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+}
+body .jlptSection .innerNav {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0 20px;
+}
+body .jlptSection h4 {
+  margin: 10px 0 0;
+}
+body .jlptSection p {
+  margin: 0;
+}
+body .jlptSection .totalKanji {
+  text-align: center;
+}
+body .jlptSection ul {
+  padding: 0;
+}
+body .jlptSection ul li {
+  font-size: 20px;
+  padding: 0;
+  display: inline;
+}
+body .jlptSection ul li a {
+  padding: 10px 10px;
+}
+body .jlptSection .kanjiModal {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background-color: #ddb6c6;
+  color: #484c7f;
+}
+@media (min-width: 800px) {
+  body .jlptSection .kanjiModal {
+    height: auto;
+    width: 28%;
+    bottom: 0;
+    left: 0;
+  }
+}
+body .jlptSection .kanjiModal a.closeWindow {
+  float: right;
+}
+body .jlptSection .kanjiModal h5 {
+  clear: both;
+  text-align: center;
+  font-size: 60px;
+  margin: 20px 0;
+}
+body .jlptSection .kanjiModal ul {
+  padding: 20px;
+}
+body .jlptSection .kanjiModal ul li {
+  display: block;
+  font-size: 16px;
+}
+body .allSection {
+  margin-top: 20px;
+}
+body .allSection table {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+  border-collapse: collapse;
+}
+body .allSection table thead {
+  background-color: #484c7f;
+  color: #f1d4d4;
+  font-family: "Montserrat", sans-serif;
+}
+body .allSection table thead th {
+  font-weight: normal;
+  padding: 10px;
+}
+body .allSection table tbody td {
+  text-align: center;
+  padding: 10px 0;
+}
+body .allSection table tbody tr {
+  border-bottom: 1px solid #f1d4d4;
+  background-color: #ddb6c6;
+}
+body .allSection div.noStoredWords {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+  color: #484c7f;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+}
+body footer {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.japanese {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.inputError {
+  color: #484c7f;
+}
+.inputError p {
+  margin: 0 10px 10px;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+/*# sourceMappingURL=style.css.map */

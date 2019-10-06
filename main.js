@@ -274,12 +274,15 @@ const fillModal = kanji =>{
   createli('modalKanjiInfo', 'On readings', kanjiInfo.on_readings)
   createli('modalKanjiInfo', 'Meanings', kanjiInfo.meanings)
   createli('modalKanjiInfo', 'Stroke count', kanjiInfo.stroke_count)
-  //createli('modalKanjiInfo', 'Words with this kanji', wordsWithThisKanji(kanjiInfo.kanji).map(e=>e.word))
+  modalWordList(kanjiInfo)
+}
+
+const modalWordList = (kanji) =>{
   let container = document.getElementById('modalKanjiInfo')
   let li = document.createElement('li')
   li.innerText = 'Words added with this kanji: '
   let innerUl = document.createElement('ul')
-  wordsWithThisKanji(kanjiInfo.kanji).forEach(word=>{
+  wordsWithThisKanji(kanji.kanji).forEach(word=>{
     let innerLi = document.createElement('li')
     innerLi.innerText = word.word
     innerLi.onclick = () =>{
