@@ -274,7 +274,30 @@ const fillModal = kanji =>{
   createli('modalKanjiInfo', 'On readings', kanjiInfo.on_readings)
   createli('modalKanjiInfo', 'Meanings', kanjiInfo.meanings)
   createli('modalKanjiInfo', 'Stroke count', kanjiInfo.stroke_count)
-  createli('modalKanjiInfo', 'Words with this kanji', wordsWithThisKanji(kanjiInfo.kanji).map(e=>e.word))
+  //createli('modalKanjiInfo', 'Words with this kanji', wordsWithThisKanji(kanjiInfo.kanji).map(e=>e.word))
+  let container = document.getElementById('modalKanjiInfo')
+  let li = document.createElement('li')
+  li.innerText = 'Words added with this kanji: '
+  let innerUl = document.createElement('ul')
+  wordsWithThisKanji(kanjiInfo.kanji).forEach(word=>{
+    let innerLi = document.createElement('li')
+    innerLi.innerText = word.word
+    innerLi.onclick = () =>{
+      fillWordModal(word)
+    }
+    innerUl.appendChild(innerLi)
+  })
+  li.appendChild(innerUl)
+  container.appendChild(li)
+}
+
+const fillWordModal = (word) =>{
+  showElement('wordModal')
+  let title = document.getElementById('modalWordTitle')
+  title.innerText = word.word
+  innerHTMLCleaner('modalWordInfo')
+  createli('modalWordInfo', 'Reading', word.reading)
+  createli('modalWordInfo', 'Anotation', word.anotation)
 }
 
 const createli = (containerId, subtitle, content) =>{
@@ -316,6 +339,11 @@ const closeDisclaimerModal = () =>{
 const closeModal = () =>{
   event.preventDefault()
   hideElement('kanjiModal')
+} 
+
+const closeWordModal = () =>{
+  event.preventDefault()
+  hideElement('wordModal')
 } 
 
 const showSortByJlpt = () =>{
