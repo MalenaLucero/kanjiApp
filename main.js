@@ -25,6 +25,17 @@ let EvaVocab = [
   {word: '思い出', reading: 'omoide (memory)', anotation: 'omoide wo uragiru nara'},
   {word: '輝く', reading: 'kagayaku (shine)', anotation: 'kono sora wo daite kagayaku'},
   {word: '神話', reading: 'shinwa (legend)', anotation: 'shounen yo shinwa ni nare'},
+  {word: '眠る', reading: 'nemuru (sleep)', anotation: 'sotto nemutteru'},
+  {word: '愛', reading: 'ai (love)', anotation: 'watashi no ai no yurikago'},
+  {word: '使者', reading: 'shisha(messenger)', anotation: 'anata dake ga mune no shisha ni'},
+  {word: '朝', reading: 'asa (morning)', anotation: 'yobareru asa ga kuru'},
+  {word: '細い', reading: 'hosoi (thin)', anotation: 'hosoi kubtsuji wo'},
+  {word: '月明り', reading: 'tsukiakari (moonlight)', anotation: 'tsukiakari ga utsushiteru'},
+  {word: '世界', reading: 'sekai (world)', anotation: 'sekaijuu no toki wo tomete'},
+  {word: '閉じる', reading: 'tojiru (close)', anotation: 'tojikometai kedo'},
+  {word: '逢う', reading: 'au (meet)', anotation: 'moshimo futari aeta koto ni'},
+  {word: '意味', reading: 'imi (meaning)', anotation: 'imi ga aru nara'},
+  {word: '自由', reading: 'jiyuu (free)', anotation: 'watashi wa sou jiyuu wo shiru tame no baiburu'},
 ]
 
 const EvaVocabUpload = () =>{
