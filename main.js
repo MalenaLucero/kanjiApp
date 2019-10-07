@@ -39,7 +39,13 @@ let EvaVocab = [
 ]
 
 const EvaVocabUpload = () =>{
-  EvaVocab.reverse().forEach((vocab, i)=>{
+  let vocabUploaded = userInput.allWords.find(word=>{
+    if(word.id === 'eva0'){
+      return true
+    }else{return false}
+  })
+  if(!vocabUploaded){
+    EvaVocab.reverse().forEach((vocab, i)=>{
     let kanjiArray = getKanjiArray(vocab.word)
     let newWord = new storedWord(`eva${i}`, vocab.word, vocab.reading, vocab.anotation, kanjiArray)
     userInput.allWords.push(newWord)
@@ -54,9 +60,10 @@ const EvaVocabUpload = () =>{
             setLocalStorage()
           })
           .catch(error=>console.log(error))
-      }
+        }
+      })
     })
-  })
+  }
 }
 
 const checkExistingData = () =>{
