@@ -268,6 +268,29 @@ body .jlptSection .kanjiModal ul li {
   display: block;
   font-size: 16px;
 }
+body .jlptSection .kanjiModal ul .wordListLi {
+  display: inline;
+}
+body .jlptSection .kanjiListItem {
+  cursor: pointer;
+  color: #484c7f;
+  background-color: #ddb6c6;
+  border-radius: 8px;
+  margin: 5px;
+}
+body .jlptSection .kanjiListItem:hover {
+  background-color: #ac8daf;
+}
+body .jlptSection .wordListItem {
+  cursor: pointer;
+  color: #ddb6c6;
+  background-color: #484c7f;
+  border-radius: 8px;
+  margin: 5px;
+}
+body .jlptSection .wordListItem:hover {
+  background-color: #ac8daf;
+}
 body .allSection {
   margin-top: 20px;
 }

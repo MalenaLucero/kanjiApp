@@ -88,12 +88,15 @@ a{
     }
 }
 
-@mixin seeMoreBtn($letterColor, $backgroundColor){
+@mixin seeMoreBtn($letterColor, $backgroundColor, $hoverColor){
     cursor: pointer;
     color: $letterColor;
     background-color: $backgroundColor;
-    padding: 10px;
-    border-radius: 10px;
+    border-radius: 8px;
+    margin: 5px;
+    &:hover{
+        background-color: $hoverColor;
+    }
 }
 
 body{
@@ -283,7 +286,17 @@ body{
                     display: block;
                     font-size: 16px;
                 }
+                .wordListLi{
+                    display: inline;
+                }
             }
+        }
+        .kanjiListItem{
+            @include seeMoreBtn($dark-color, $light-color, $main-color)
+        }
+        
+        .wordListItem{
+            @include seeMoreBtn($light-color, $dark-color, $main-color)
         }
     }
     .allSection{

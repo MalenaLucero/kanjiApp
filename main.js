@@ -4,6 +4,50 @@ let userInput = {
   allKanji: []//stores only the kanji of the words the user inputs, without repeating kanji
 }
 
+let EvaVocab = [
+  {word: '残酷', reading: 'zankoku (cruel)', anotation: 'zankoku na tenshi noyouni'},
+  {word: '少年', reading: 'shounen (boy)', anotation: 'shounen yo shinwa ni nare'},
+  {word: '青い', reading: 'aoi (blue)', anotation: 'aoi kaze ga ima'},
+  {word: '胸', reading: 'mune (chest)', anotation: 'mune no doa wo tataitemo'},
+  {word: '私', reading: 'watashi (I)', anotation: 'watashi dake wo tada mitsumete'},
+  {word: '微笑む', reading: 'hohoemu (smile)', anotation: 'hohoenderu anata'},
+  {word: '触れる', reading: 'fureru (touch)', anotation: 'sotto fureru mono'},
+  {word: '求める', reading: 'motomeru (seek)', anotation: 'motomeru koto ni muchuu de'},
+  {word: '運命', reading: 'unmei (fate)', anotation: 'unmei sae mada shiranai'},
+  {word: '瞳', reading: 'hitomi (pupil)', anotation: 'itaike na hitomi'},
+  {word: '気づく', reading: 'kizuku (realize)', anotation: 'dakedo itsuka kizuku deshou'},
+  {word: '背中', reading: 'senaka (back)', anotation: 'sono senaka ni wa'},
+  {word: '遥か', reading: 'haruka (distant)', anotation: 'haruka mirai mezasu tame no'},
+  {word: '羽根', reading: 'hane (wing)', anotation: 'hane ga aru koto'},
+  {word: '天使', reading: 'tenshi (angel)', anotation: 'zankokou na tenshi no teeze'},
+  {word: '窓辺', reading: 'madobe (by the window)', anotation: 'madobe kara yagate tobidatsu'}, 
+  {word: '迸る', reading: 'hotobashiru (surge)', anotation: 'hotobashiru atsui patosu de'},
+  {word: '思い出', reading: 'omoide (memory)', anotation: 'omoide wo uragiru nara'},
+  {word: '輝く', reading: 'kagayaku (shine)', anotation: 'kono sora wo daite kagayaku'},
+  {word: '神話', reading: 'shinwa (legend)', anotation: 'shounen yo shinwa ni nare'},
+]
+
+const EvaVocabUpload = () =>{
+  EvaVocab.reverse().forEach((vocab, i)=>{
+    let kanjiArray = getKanjiArray(vocab.word)
+    let newWord = new storedWord(`eva${i}`, vocab.word, vocab.reading, vocab.anotation, kanjiArray)
+    userInput.allWords.push(newWord)
+    setLocalStorage()
+    kanjiArray.forEach( e =>{
+      if(!alreadyExistingItem(e, userInput.allKanji.map(e=>e.kanji))){
+        fetch('https://kanjiapi.dev/v1/kanji/' + e)
+          .then(res=>res.json())
+          .then(res =>{
+            let newKanji = new storedKanji(res.kanji, res.grade, res.stroke_count, res.meanings, res.kun_readings, res.on_readings, res.jlpt, res.unicode)
+            userInput.allKanji.push(newKanji)
+            setLocalStorage()
+          })
+          .catch(error=>console.log(error))
+      }
+    })
+  })
+}
+
 const checkExistingData = () =>{
   let storedData = window.localStorage.getItem('locallyStoredData')
   if(storedData){userInput = JSON.parse(storedData)} 
@@ -72,6 +116,8 @@ const getKanjiArray = (word) =>{
   }
   return kanjiArray
 }
+
+EvaVocabUpload()
 
 //object constructor
 function storedWord(id, word, reading, anotation, kanjiList){
@@ -243,15 +289,16 @@ const stats = (option) =>{
 const printKanjiList = (containerId, level, option) =>{
   let kanjiList = option === 'jlpt' ? userInput.allKanji.filter(e => e.jlpt === level) : userInput.allKanji.filter(e => e.grade === level)
   printOnScreen(containerId, `Total: ${kanjiList.length}`)
-  printSimpleList(containerId, kanjiList.map(e=>e.kanji))
+  printSimpleList(containerId, kanjiList.map(e=>e.kanji), 'kanjiListItem')
 }
 
-printSimpleList = (containerId, array) =>{
+printSimpleList = (containerId, array, className)=>{
   let container = document.getElementById(containerId)
   let ul = document.createElement('ul')
   array.forEach(e=>{
     let li = document.createElement('li')
     let anchor = document.createElement('a')
+    anchor.classList.add(className)
     anchor.innerText = e
     anchor.href = "#"
     anchor.onclick = () => {
@@ -274,20 +321,24 @@ const fillModal = kanji =>{
   createli('modalKanjiInfo', 'On readings', kanjiInfo.on_readings)
   createli('modalKanjiInfo', 'Meanings', kanjiInfo.meanings)
   createli('modalKanjiInfo', 'Stroke count', kanjiInfo.stroke_count)
-  modalWordList(kanjiInfo)
+  modalWordList(kanjiInfo, 'wordListItem', 'wordListLi')
 }
 
-const modalWordList = (kanji) =>{
+const modalWordList = (kanji, classNameAnchor, classNameLi) =>{
   let container = document.getElementById('modalKanjiInfo')
   let li = document.createElement('li')
   li.innerText = 'Words added with this kanji: '
   let innerUl = document.createElement('ul')
   wordsWithThisKanji(kanji.kanji).forEach(word=>{
     let innerLi = document.createElement('li')
-    innerLi.innerText = word.word
-    innerLi.onclick = () =>{
+    innerLi.classList.add(classNameLi)
+    let innerAnchor = document.createElement('a')
+    innerAnchor.innerText = word.word
+    innerAnchor.classList.add(classNameAnchor)
+    innerAnchor.onclick = () =>{
       fillWordModal(word)
     }
+    innerLi.appendChild(innerAnchor)
     innerUl.appendChild(innerLi)
   })
   li.appendChild(innerUl)
