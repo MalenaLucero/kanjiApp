@@ -1,7 +1,5 @@
-Hello. I'm making this web application to make connections between the Japanese kanji I study everyday and I thought it might help other people. I've just started, so there's a long way to go.
+This is a web application to make connections between the kanji of different Japanese words. When you input a word, the app will tell you if you've added a word with those kanji before or not. It also creates a list of kanji and divides them by grade and JLPT level. I've added some words from Evangelion's opening theme so people who don't know Japanese can try it out. If you want to add a word and don't know Japanese, copy this one: 残念
 
-If you want to see how it works, start by adding kanji through the "New word" input. Add, for example, 新しい, then 聞く and then 新聞. When you add the last one, the app will show you the first two because they share the same kanji. The "search" button does the same and it tells you if the word you're searching has been added before or not.
-
-Soon I'll add a functionality related to the JLPT level of the kanjis stored.
+The fact that this project uses local storage is a huge handicap, so now I'm trying to figure out how to turn it into an Android app with Java. That might take a while, though.
 
 GithubPages link: https://malenalucero.github.io/kanjiApp/
