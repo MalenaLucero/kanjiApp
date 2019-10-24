@@ -2,4 +2,6 @@ This is a web application to make connections between the kanji of different Jap
 
 The fact that this project uses local storage is a huge handicap, so now I'm trying to figure out how to turn it into an Android app with Java. That might take a while, though.
 
+PRs are welcome :)
+
 GithubPages link: https://malenalucero.github.io/kanjiApp/
